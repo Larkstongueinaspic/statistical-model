@@ -9,6 +9,11 @@ from .storage import save_text_output
 
 
 def run_regression(df: pd.DataFrame, dependent: str) -> tuple[object, dict[str, object]]:
+    """
+    运行一个最小可行的固定效应回归。
+
+    这里比较的是：2018 年后，美国相对于其他出口国，是否出现了不一样的变化。
+    """
     model = smf.ols(
         formula=f"{dependent} ~ US_Post2018 + C(exporter_code) + C(year)",
         data=df,
@@ -32,8 +37,10 @@ def run_regression(df: pd.DataFrame, dependent: str) -> tuple[object, dict[str, 
 
 def run_all_regressions(panel: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, object]]:
     """
-    Keep the v0.1 regression suite small and explicit:
-    baseline + alternative dependent variable + no-COVID sample.
+    把 v0.1 需要的三组回归集中放在一起：
+    1. 基准模型
+    2. 更换被解释变量
+    3. 剔除疫情年份
     """
     baseline_model, baseline_result = run_regression(panel, "ln_import_value")
     asinh_model, asinh_result = run_regression(panel, "asinh_import_value")
@@ -56,5 +63,6 @@ def run_all_regressions(panel: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, ob
 
 
 def write_model_outputs(models: dict[str, object], config: AnalysisConfig) -> None:
+    """把 statsmodels 的长回归结果保存成文本，便于人工阅读和排查。"""
     for filename, model in models.items():
         save_text_output(model.summary().as_text(), filename, config.table_output_dir)

@@ -14,12 +14,19 @@ def build_test_results(
     regression_results: pd.DataFrame,
     config: AnalysisConfig,
 ) -> pd.DataFrame:
+    """
+    统一生成测试结果表。
+
+    测试分成三类：数据测试、脚本测试、结果测试。
+    这样后面看报告时，能很快知道问题出在哪一层。
+    """
     tests: list[dict[str, object]] = []
 
     def add_test(category: str, name: str, passed: bool, detail: str) -> None:
         tests.append({"category": category, "test_name": name, "passed": "PASS" if passed else "FAIL", "detail": detail})
 
     unique_years = sorted(positive_trades["year"].astype(int).unique().tolist())
+    # 数据测试：先确认样本口径没有跑偏。
     add_test("data", "Year coverage is complete", unique_years == list(config.years), f"Observed years: {unique_years}")
     importer_codes = sorted(panel["importer_code"].astype(int).unique().tolist())
     add_test("data", "Importer is uniquely China (156)", importer_codes == [config.china_code], f"Importer codes: {importer_codes}")
@@ -40,12 +47,14 @@ def build_test_results(
     add_test("data", "Positive trade sample has 585 rows", len(positive_trades) == 585, f"Observed rows: {len(positive_trades)}")
 
     add_test("script", "Script uses relative project paths", True, "Input/output paths derive from the repository root in the script configuration.")
+    # 脚本测试：确认关键输出确实生成了。
     figure_count = len(list(config.figure_output_dir.glob("*.png")))
     add_test("script", "Expected figure files were generated", figure_count == 5, f"Figure count: {figure_count}")
     table_count = len(list(config.table_output_dir.glob("*")))
     add_test("script", "Expected table files were generated", table_count > 0, f"Table file count: {table_count}")
 
     total_from_panel = panel.groupby("year")["import_value_kusd"].sum().reset_index(drop=True)
+    # 结果测试：确认图表和表格都来自同一套数据，没有前后打架。
     total_from_summary = annual_summary["total_import_kusd"].reset_index(drop=True)
     add_test(
         "result",

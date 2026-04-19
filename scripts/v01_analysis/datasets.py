@@ -9,6 +9,7 @@ from .config import AnalysisConfig
 
 
 def load_country_codes(config: AnalysisConfig) -> pd.DataFrame:
+    """读取国家代码表，后面要把数字国家代码翻译成国家名称。"""
     return pd.read_csv(
         config.data_dir / "country_codes_V202601.csv",
         dtype={
@@ -21,6 +22,7 @@ def load_country_codes(config: AnalysisConfig) -> pd.DataFrame:
 
 
 def load_product_description(config: AnalysisConfig) -> str:
+    """读取目标 HS6 产品的文字描述，方便结果表里带上产品含义。"""
     product_codes = pd.read_csv(
         config.data_dir / "product_codes_HS07_V202601.csv",
         dtype={"code": "string", "description": "string"},
@@ -33,9 +35,9 @@ def load_product_description(config: AnalysisConfig) -> str:
 
 def load_yearly_positive_trades(year: int, config: AnalysisConfig) -> pd.DataFrame:
     """
-    Read one BACI year in chunks and keep only the China-import / target-product rows.
+    分块读取某一年的 BACI 数据，只保留“中国进口 + 目标产品”的记录。
 
-    BACI yearly files are large enough that full-file reads are wasteful for this v0.1 task.
+    BACI 年度文件很大，先按块过滤比整表读入内存更稳。
     """
     frames: list[pd.DataFrame] = []
     for chunk in pd.read_csv(
@@ -58,6 +60,7 @@ def load_yearly_positive_trades(year: int, config: AnalysisConfig) -> pd.DataFra
             frames.append(filtered)
 
     if not frames:
+        # 即便这一年没有匹配记录，也返回结构完整的空表，后续流程就不用写特殊分支。
         return pd.DataFrame(
             columns=[
                 "year",
@@ -87,6 +90,11 @@ def build_positive_trade_sample(
     product_description: str,
     config: AnalysisConfig,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    拼出“正向贸易流样本”。
+
+    这个表只保留真实出现过的贸易记录，不会主动补零。
+    """
     frames: list[pd.DataFrame] = []
     year_checks: list[dict[str, object]] = []
     country_lookup = country_codes[["country_code", "country_name", "country_iso3"]].rename(
@@ -110,6 +118,7 @@ def build_positive_trade_sample(
         )
 
     positive_trades = pd.concat(frames, ignore_index=True)
+    # 在这个阶段补上国家名称和产品描述，后面作图和出表会更直观。
     positive_trades["product_description"] = product_description
     positive_trades = positive_trades.merge(country_lookup, on="exporter_code", how="left")
     positive_trades["importer_name"] = "China"
@@ -124,10 +133,11 @@ def build_balanced_panel(
     config: AnalysisConfig,
 ) -> pd.DataFrame:
     """
-    Expand the sparse trade flows to a balanced exporter-year panel.
+    把稀疏的贸易流扩成“平衡面板”。
 
-    Missing exporter-year combinations are set to zero so the DID specification
-    uses a common sample window for treated and control exporters.
+    直白地说，就是给每个出口国都补齐每一年。
+    如果某个国家某一年没出现在 BACI 里，这里就把它当作该年进口额为 0。
+    这样做的目的，是让美国和其他国家在同一套年份窗口里做比较。
     """
     exporter_lookup = (
         positive_trades[["exporter_code", "exporter_name", "exporter_iso3"]]
@@ -157,12 +167,19 @@ def build_balanced_panel(
     panel["US"] = (panel["exporter_code"] == config.usa_code).astype(int)
     panel["Post2018"] = (panel["year"] >= 2018).astype(int)
     panel["US_Post2018"] = panel["US"] * panel["Post2018"]
+    # 同时保留 log 和 asinh 两种形式，后面做基准回归和稳健性都要用。
     panel["ln_import_value"] = np.log(panel["import_value_kusd"] + 1.0)
     panel["asinh_import_value"] = np.arcsinh(panel["import_value_kusd"])
     return panel.sort_values(["exporter_code", "year"], ignore_index=True)
 
 
 def build_annual_summary(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    生成年度汇总表和前五来源国份额表。
+
+    前者用于总额、美国进口额、美国份额和 HHI；
+    后者用于画“主要来源国份额变化”那张图。
+    """
     annual_total = panel.groupby("year", as_index=False)["import_value_kusd"].sum().rename(
         columns={"import_value_kusd": "total_import_kusd"}
     )
@@ -191,6 +208,7 @@ def build_annual_summary(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFram
     for year, group in panel.groupby("year"):
         total = float(group["import_value_kusd"].sum())
         shares = group["import_value_kusd"] / total if total > 0 else 0.0
+        # HHI 可以粗略理解为“来源集中度”：越大，说明越集中在少数国家。
         hhi_rows.append({"year": int(year), "hhi": float((shares**2).sum()) if total > 0 else 0.0})
     annual_summary = annual_summary.merge(pd.DataFrame(hhi_rows), on="year", how="left")
 
@@ -202,6 +220,7 @@ def build_annual_summary(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFram
         .reset_index(drop=True)
     )
     top_codes = top_exporters["exporter_code"].tolist()
+    # 前五来源国按全样本累计值固定下来，避免每年换一套国家导致图难读。
     source_shares = (
         panel.loc[panel["exporter_code"].isin(top_codes)]
         .pivot_table(index="year", columns="exporter_name", values="import_value_kusd", aggfunc="sum")
@@ -221,6 +240,7 @@ def build_annual_summary(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFram
 
 
 def build_descriptive_stats(panel: pd.DataFrame, positive_trades: pd.DataFrame) -> pd.DataFrame:
+    """整理一张够用的描述统计表，快速说明样本规模和数值分布。"""
     rows = []
     group_lookup = {
         "Overall": panel,

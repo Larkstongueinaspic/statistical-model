@@ -19,20 +19,22 @@ def main() -> int:
     config = get_config()
     ensure_output_dirs(config)
 
-    # Phase 1: extract the minimum raw sample needed for this paper draft.
+    # 第 1 步：先把论文真正要用的最小原始样本抽出来。
     country_codes = load_country_codes(config)
     product_description = load_product_description(config)
     positive_trades, year_checks = build_positive_trade_sample(country_codes, product_description, config)
 
-    # Phase 2: prepare all analytical datasets before touching regressions or charts.
+    # 第 2 步：先准备好所有分析数据，再做图和回归。
     panel = build_balanced_panel(positive_trades, product_description, config)
     annual_summary, source_shares = build_annual_summary(panel)
     descriptive_stats = build_descriptive_stats(panel, positive_trades)
 
     print("[2/4] Running regressions...", flush=True)
+    # 第 3 步：跑基准回归和最小稳健性。
     regression_results, models = run_all_regressions(panel)
 
     print("[3/4] Writing datasets, tables, and figures...", flush=True)
+    # 第 4 步：统一把中间数据、图和表写到 results/ 下面。
     save_dataset(positive_trades, "positive_trades_848620_china_2008_2024.csv", config)
     save_dataset(panel, "balanced_panel_848620_china_2008_2024.csv", config)
     save_dataset(annual_summary, "annual_summary_848620_china_2008_2024.csv", config)
@@ -47,6 +49,7 @@ def main() -> int:
     create_all_figures(annual_summary, source_shares, config)
 
     print("[4/4] Running validation checks...", flush=True)
+    # 最后一步：把所有关键测试结果汇总成一张表，便于交付前自检。
     test_results = build_test_results(positive_trades, panel, annual_summary, source_shares, regression_results, config)
     save_table(test_results, "test_results_848620", config)
 

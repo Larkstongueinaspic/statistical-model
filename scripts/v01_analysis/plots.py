@@ -6,6 +6,7 @@ from .config import AnalysisConfig
 
 
 def configure_matplotlib(config: AnalysisConfig):
+    # 先设置可写缓存目录，再导入 matplotlib，避免权限问题。
     os.environ.setdefault("MPLCONFIGDIR", str(config.mpl_config_dir))
     import matplotlib
 
@@ -26,9 +27,11 @@ def plot_line(
     config: AnalysisConfig,
     percent_axis: bool = False,
 ) -> None:
+    """画单条时间趋势线，用于总额、美国进口额、美国份额和 HHI。"""
     plt, PercentFormatter = configure_matplotlib(config)
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(x, y, linewidth=2.4, color="#1f4e79")
+    # 2018 是当前 v0.1 的政策分界点，所以在核心图里画一条参考线。
     ax.axvline(2018, color="#a61c3c", linestyle="--", linewidth=1.5)
     ax.set_title(title)
     ax.set_xlabel("Year")
@@ -43,6 +46,7 @@ def plot_line(
 
 
 def plot_source_shares(source_shares, config: AnalysisConfig) -> None:
+    """画前五来源国份额变化图，直观看来源替代。"""
     plt, PercentFormatter = configure_matplotlib(config)
     fig, ax = plt.subplots(figsize=(11, 6.5))
     share_columns = [column for column in source_shares.columns if column != "year"]
@@ -63,7 +67,7 @@ def plot_source_shares(source_shares, config: AnalysisConfig) -> None:
 
 
 def create_all_figures(annual_summary, source_shares, config: AnalysisConfig) -> None:
-    # Keep the figure list explicit so the paper-facing outputs are easy to audit.
+    # 这里把所有 v0.1 必做图明确列出来，避免后期漏图。
     plot_line(
         annual_summary["year"],
         annual_summary["total_import_kusd"],

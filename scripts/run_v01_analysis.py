@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Thin entrypoint for the v0.1 BACI pipeline."""
+"""v0.1 主入口：保留稳定的运行命令，具体逻辑放到包内模块。"""
 
 from v01_analysis.runner import main
 
