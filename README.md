@@ -7,13 +7,15 @@ wget https://www.cepii.fr/DATA_DOWNLOAD/baci/data/BACI_HS07_V202601.zip
 unzip BACI_HS07_V202601.zip
 ```
 
+然后创建 Python 虚拟环境后安装 `requirements.txt` 依赖。
+
 这是一个围绕“中国自美国进口半导体相关产品是否发生变化”展开的小型数据分析项目。  
 当前版本的重点不是复杂建模，而是先把一条稳定、可复现的分析流水线跑通。
 
 目前已经完成的是 v0.1：
 
 - 题目锁定为“美国出口管制对中国半导体相关产品进口的影响研究”
-- 主样本先做 `HS6=848620`
+- 主样本先做 `HS6=848620`。`id=848620`是`Machines and apparatus of a kind used solely or principally for the manufacture of semiconductor devices or of electronic integrated circuits`，其他id可以在数据库里的`product_codes_HS07_V202601.csv`看到
 - 数据源固定为 `BACI HS07 2008-2024`
 - 已经具备从原始数据到图表、回归表和测试结果的完整脚本
 
@@ -105,9 +107,8 @@ pip install -r requirements.txt
 
 文档类输出在：
 
-- `docs/output/工作日志-v0.1.md`
-- `docs/output/结果摘要-v0.1.md`
-- `docs/output/阶段总结-v0.1.md`
+- `docs/output/abstract_v0.1.md`
+- `docs/output/summary_v0.1.md`
 
 ## 6. 当前分析范围
 
@@ -127,7 +128,7 @@ v0.1 故意做得很小，目的是先跑通：
 - 全球预警平台
 - 复杂因果识别设计
 
-## 7. 新人最推荐的上手顺序
+## 7. 上手顺序
 
 如果你刚接手，建议按这个顺序看：
 
@@ -141,9 +142,9 @@ v0.1 故意做得很小，目的是先跑通：
 重点不是先搞懂统计术语，而是先搞懂：
 “原始数据怎么一步步变成结果图表和输出表格。”
 
-## 8. 下一步通常做什么
+## 8. 下一步做什么
 
-如果你要继续推进这个项目，最自然的扩展方向有三个：
+最自然的扩展方向有三个：
 
 1. 从单产品扩展到 `2-3` 个产品
 2. 把政策节点从 `2018` 扩展到 `2022/2023`
@@ -153,4 +154,4 @@ v0.1 故意做得很小，目的是先跑通：
 
 - BACI 原始数据体量较大，脚本已经按分块读取处理，不要轻易改成整文件一次性读入。
 - 当前 `results/` 和原始数据目录默认不进 Git。
-- 如果你要改样本范围，优先改 `config.py`，不要在多个文件里手工改常量。
+- 如果要改样本范围，优先改 `config.py`，不要在多个文件里手工改常量。
