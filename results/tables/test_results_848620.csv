@@ -1,0 +1,18 @@
+category,test_name,passed,detail
+data,Year coverage is complete,PASS,"Observed years: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]"
+data,Importer is uniquely China (156),PASS,Importer codes: [156]
+data,HS6 product code is uniquely 848620,PASS,Product codes: ['848620']
+data,Import values are non-negative,PASS,Min value: 0.000000 kUSD
+data,"Balanced panel has 1,020 rows",PASS,Observed rows: 1020
+data,Positive trade sample has 585 rows,PASS,Observed rows: 585
+script,Script uses relative project paths,PASS,Input/output paths derive from the repository root in the script configuration.
+script,Expected figure files were generated,PASS,Figure count: 5
+script,Expected table files were generated,PASS,Table file count: 14
+result,Annual totals match panel aggregation,PASS,Compared annual_summary.total_import_kusd against panel groupby totals.
+result,US import totals match panel aggregation,PASS,Compared annual_summary.us_import_kusd against panel US groupby totals.
+result,US shares match summary arithmetic,PASS,Recomputed us_share from annual totals and US imports.
+result,US_Post2018 enters model with 7 treated observations,PASS,Treated observations: 7
+result,"Baseline regression sample size is 1,020",PASS,Nobs: 1020
+result,"Asinh robustness sample size is 1,020",PASS,Nobs: 1020
+result,No-COVID regression sample size is 900,PASS,Nobs: 900
+result,"Top-five source shares stay within [0,1]",PASS,Checked all plotted source-country shares.

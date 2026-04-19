@@ -1,0 +1,4 @@
+model,dependent_variable,coef_us_post2018,std_error,p_value,ci_low,ci_high,nobs,r_squared,treatment_observations,approx_pct_effect
+baseline_ln,ln_import_value,0.318201,0.226112,0.159348,-0.124971,0.761373,1020,0.886969,7,0.374652
+robust_asinh,asinh_import_value,0.259378,0.241112,0.282036,-0.213193,0.731949,1020,0.878297,7,
+robust_drop_2020_2021,ln_import_value,0.199892,0.242963,0.410663,-0.276307,0.676092,900,0.883222,5,0.221271
