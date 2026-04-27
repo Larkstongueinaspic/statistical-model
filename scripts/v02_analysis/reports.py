@@ -49,6 +49,7 @@ def write_summary(
     annual: pd.DataFrame,
     top_2024: pd.DataFrame,
     regression_tables: dict[str, pd.DataFrame],
+    siri_ranking: pd.DataFrame,
     config: AnalysisConfig,
 ) -> None:
     numbers = build_report_numbers(
@@ -63,13 +64,14 @@ def write_summary(
         top = top_2024.loc[top_2024["product_code"] == code].sort_values("rank_2024").head(5)
         sources = "、".join(f"{row.exporter_name} {_pct(row.share)}" for row in top.itertuples())
         top_lines.append(f"- `{code}`：{sources}")
+    top_risk = siri_ranking.sort_values("rank").iloc[0]
     summary = f"""# 阶段总结-v0.2
 
 ## 本轮完成内容
 
 - 在不改动 v0.1 的前提下，新建 `scripts/run_v02_analysis.py` 和 `scripts/v02_analysis/`。
 - v0.2 产品范围扩展为 {product_list}，覆盖设备类和集成电路类产品。
-- 新增 `Post2022`、`Post2023` 及互斥阶段变量，输出多产品面板、筛查表、描述统计表、图表、回归表、稳健性表和测试表。
+- 新增 `Post2022`、`Post2023` 及互斥阶段变量，输出多产品面板、筛查表、描述统计表、SIRI 风险指数、图表、回归表、稳健性表和测试表。
 - 输出路径统一为 `results/v02/`，文档输出为 `docs/output/log_v0.2.md`、`docs/output/summary_v0.2.md`、`docs/output/abstract_v0.2.md`。
 
 ## 主要结果
@@ -77,6 +79,7 @@ def write_summary(
 - 美国份额下降不是只发生在 `848620`，但集成电路类产品并非完全同向。`848620` 美国份额从 2017 年 {_pct(numbers['848620_us_share_2017'])} 降至 2024 年 {_pct(numbers['848620_us_share_2024'])}；`854231` 和 `854232` 也下降，而 `854239` 从低基数小幅上升。
 - 2024 年主要来源国显示，设备类替代主要集中在日本、荷兰、新加坡等国家；集成电路类产品的主要来源则更多集中在韩国、马来西亚、越南、`Other Asia, nes` 等亚洲生产网络节点。
 {chr(10).join(top_lines)}
+- SIRI 综合风险指数显示，2024 年风险最高的产品为 `{top_risk.product_code}`，基准得分为 {top_risk.siri_score:.2f}。权重敏感性检验用于确认风险排序是否依赖政策暴露权重。
 - 多产品 pooled 回归中，`US_Post2018`、`US_Post2022`、`US_Post2023` 分别为 {numbers['policy_us_post2018']}、{numbers['policy_us_post2022']}、{numbers['policy_us_post2023']}。方向和显著性说明，细化节点后仍不能把结果简单写成“美国对华出口额显著下降”。
 - 份额型结果更贴近描述事实：`US_Post2018`、`US_Post2022`、`US_Post2023` 分别为 {numbers['share_us_post2018']}、{numbers['share_us_post2022']}、{numbers['share_us_post2023']}。这些系数方向偏负但不显著，更适合作为“份额承压”的补充证据，而不是强因果证据。
 
@@ -108,6 +111,7 @@ def write_abstract(
     panel: pd.DataFrame,
     annual: pd.DataFrame,
     regression_tables: dict[str, pd.DataFrame],
+    siri_ranking: pd.DataFrame,
     config: AnalysisConfig,
 ) -> None:
     numbers = build_report_numbers(
@@ -118,6 +122,7 @@ def write_abstract(
     )
     product_list = ", ".join(f"`{code}`" for code in selected_products)
     positive_rows = int((panel["import_value_kusd"] > 0).sum())
+    top_risk = siri_ranking.sort_values("rank").iloc[0]
     abstract = f"""# 结果摘要-v0.2
 
 ## 样本与方法
@@ -126,7 +131,7 @@ def write_abstract(
 - 观察单元为 `出口国 × 产品 × 年份`。v0.2 在每个产品内部保留样本期内曾向中国出口该产品的出口国，并补齐 `2008-2024` 年；未出现的产品-出口国-年份贸易流按 `0` 处理。
 - 多产品面板共 `{len(panel)}` 行，其中正向贸易记录 `{positive_rows}` 行。
 - 核心变量包括 `import_value_kusd`、`ln_import_value`、`asinh_import_value`、`product_code`、`exporter_code`、`year`、`US`、`Post2018`、`Post2022`、`Post2023`、`US_Post2018`、`US_Post2022`、`US_Post2023` 和 `import_share`。
-- 基准扩展模型为 `ln(import_value+1) = β1 US_Post2018 + β2 US_Post2022 + β3 US_Post2023 + 出口国固定效应 + 产品固定效应 + 年份固定效应 + error`，并补充分产品、产品组、份额型结果和稳健性估计。
+- 基准扩展模型为 `ln(import_value+1) = β1 US_Post2018 + β2 US_Post2022 + β3 US_Post2023 + 出口国固定效应 + 产品固定效应 + 年份固定效应 + error`，并补充分产品、产品组、份额型结果、SIRI 风险指数和稳健性估计。
 
 ## 多产品描述性事实
 
@@ -134,6 +139,7 @@ def write_abstract(
 - 集成电路类产品存在异质性。`854231` 从 2017 年 {_pct(numbers['854231_us_share_2017'])} 到 2024 年 {_pct(numbers['854231_us_share_2024'])}，`854232` 从 2017 年 {_pct(numbers['854232_us_share_2017'])} 到 2024 年 {_pct(numbers['854232_us_share_2024'])}，但 `854239` 从 2017 年 {_pct(numbers['854239_us_share_2017'])} 到 2024 年 {_pct(numbers['854239_us_share_2024'])}，说明不能把所有集成电路产品写成同一种方向。
 - 替代来源存在产品差异：设备类更依赖日本、荷兰、新加坡等设备强国，集成电路类更多体现亚洲生产网络内部的来源调整。
 - HHI 指标显示，来源替代不必然意味着来源分散；部分产品在 2024 年仍明显集中于少数主要来源。
+- SIRI 风险指数从来源集中、政策暴露、替代不足和结构波动四个维度综合评估产品风险。2024 年基准风险排序最高的产品为 `{top_risk.product_code}`，基准得分为 {top_risk.siri_score:.2f}。
 
 ## 政策节点回归结果
 

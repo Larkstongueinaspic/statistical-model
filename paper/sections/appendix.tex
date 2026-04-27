@@ -1,0 +1,29 @@
+\section{复现说明}
+
+主要复现命令如下：
+\begin{verbatim}
+.venv/bin/python scripts/run_v02_analysis.py
+\end{verbatim}
+当前仓库已保存 v0.2 的缓存结果。若需从原始数据完整复现，需要将 BACI HS07 V202601 原始数据目录放置于项目根目录下的 \texttt{BACI\_HS07\_V202601/}。
+
+\section{变量说明}
+
+\begin{longtable}{ll}
+\toprule
+变量 & 含义 \\
+\midrule
+\endhead
+\texttt{import\_value\_kusd} & 中国自某来源国进口某产品的年度金额，单位为千美元 \\
+\texttt{import\_share} & 来源国进口额占产品--年份总进口额的比例 \\
+\texttt{US} & 来源国是否为美国 \\
+\texttt{Post2018} & 年份是否不早于 2018 年 \\
+\texttt{Post2022} & 年份是否不早于 2022 年 \\
+\texttt{Post2023} & 年份是否不早于 2023 年 \\
+\texttt{siri\_score} & 基准 SIRI 风险指数得分 \\
+\texttt{siri\_score\_policy\_weighted} & 提高政策暴露权重后的 SIRI 得分 \\
+\bottomrule
+\end{longtable}
+
+\section{AI 工具使用说明}
+
+本文写作和代码整理过程中使用 AI 工具辅助结构设计、代码实现建议、LaTeX 排版和文字润色。数据来源、模型设定、结果解释和最终结论由参赛队审核确认。详细记录见 \texttt{paper/ai\_usage\_notes.md}，最终提交时应按官方 AI 工具使用情况表格式填写。

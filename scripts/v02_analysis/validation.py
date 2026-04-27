@@ -6,6 +6,165 @@ import pandas as pd
 from .config import AnalysisConfig
 
 
+def build_siri_test_results(
+    siri_index: pd.DataFrame,
+    siri_ranking: pd.DataFrame,
+    siri_sensitivity: pd.DataFrame,
+    config: AnalysisConfig,
+) -> pd.DataFrame:
+    tests: list[dict[str, object]] = []
+
+    def add_test(category: str, name: str, passed: bool, detail: str) -> None:
+        tests.append({"category": category, "test_name": name, "passed": "PASS" if passed else "FAIL", "detail": detail})
+
+    expected_rows = len(config.candidate_product_codes) * len(config.years)
+    required_columns = {
+        "product_code",
+        "year",
+        "total_import_value_kusd",
+        "concentration_raw",
+        "policy_exposure_raw",
+        "alternative_insufficiency_raw",
+        "structural_volatility_raw",
+        "concentration_norm",
+        "policy_exposure_norm",
+        "alternative_insufficiency_norm",
+        "structural_volatility_norm",
+        "siri_score",
+        "siri_score_policy_weighted",
+    }
+    ranking_columns = {
+        "rank",
+        "product_code",
+        "product_name",
+        "year",
+        "siri_score",
+        "siri_score_policy_weighted",
+        "rank_policy_weighted",
+        "rank_change",
+    }
+    sensitivity_columns = {
+        "product_code",
+        "product_name",
+        "baseline_rank",
+        "policy_weighted_rank",
+        "rank_change",
+        "baseline_siri_score",
+        "policy_weighted_siri_score",
+    }
+
+    add_test("siri", "SIRI output has required columns", required_columns.issubset(siri_index.columns), f"Columns: {siri_index.columns.tolist()}")
+    add_test(
+        "siri",
+        "SIRI product-year row count matches selected products",
+        len(siri_index) == expected_rows,
+        f"Observed rows: {len(siri_index)}, expected rows: {expected_rows}",
+    )
+    add_test(
+        "siri",
+        "SIRI years cover configured range",
+        set(siri_index["year"].astype(int)) == set(config.years),
+        f"Years: {sorted(siri_index['year'].unique().tolist())}",
+    )
+    coverage = siri_index.groupby("product_code")["year"].nunique().to_dict()
+    add_test(
+        "siri",
+        "Each SIRI product covers every configured year",
+        all(count == len(config.years) for count in coverage.values()),
+        f"Coverage: {coverage}",
+    )
+    add_test(
+        "siri",
+        "SIRI scores stay within 0-100",
+        bool(((siri_index["siri_score"] >= 0) & (siri_index["siri_score"] <= 100)).all()),
+        "Checked baseline SIRI score bounds.",
+    )
+    add_test(
+        "siri",
+        "Policy-weighted SIRI scores stay within 0-100",
+        bool(((siri_index["siri_score_policy_weighted"] >= 0) & (siri_index["siri_score_policy_weighted"] <= 100)).all()),
+        "Checked policy-weighted SIRI score bounds.",
+    )
+    norm_columns = [column for column in siri_index.columns if column.endswith("_norm")]
+    add_test(
+        "siri",
+        "SIRI normalized components stay within 0-1",
+        bool(((siri_index[norm_columns] >= 0) & (siri_index[norm_columns] <= 1)).all().all()),
+        f"Norm columns: {norm_columns}",
+    )
+    add_test(
+        "siri",
+        "SIRI required fields are non-missing",
+        bool(siri_index[list(required_columns)].notna().all().all()),
+        "Checked required fields for missing values.",
+    )
+    add_test("siri", "SIRI ranking has required columns", ranking_columns.issubset(siri_ranking.columns), f"Columns: {siri_ranking.columns.tolist()}")
+    add_test(
+        "siri",
+        "SIRI ranking covers all selected products",
+        len(siri_ranking) == len(config.candidate_product_codes),
+        f"Rows: {len(siri_ranking)}",
+    )
+    add_test(
+        "siri",
+        "SIRI ranking product set matches configured products",
+        set(siri_ranking["product_code"].astype(str)) == set(config.candidate_product_codes),
+        f"Products: {sorted(siri_ranking['product_code'].astype(str).tolist())}",
+    )
+    add_test(
+        "siri",
+        "SIRI ranking ranks are unique",
+        bool(siri_ranking["rank"].is_unique and siri_ranking["rank_policy_weighted"].is_unique),
+        "Checked baseline and policy-weighted ranks.",
+    )
+    add_test("siri", "SIRI sensitivity has required columns", sensitivity_columns.issubset(siri_sensitivity.columns), f"Columns: {siri_sensitivity.columns.tolist()}")
+    add_test(
+        "siri",
+        "SIRI sensitivity covers all selected products",
+        len(siri_sensitivity) == len(config.candidate_product_codes),
+        f"Rows: {len(siri_sensitivity)}",
+    )
+    add_test(
+        "siri",
+        "SIRI sensitivity product set matches configured products",
+        set(siri_sensitivity["product_code"].astype(str)) == set(config.candidate_product_codes),
+        f"Products: {sorted(siri_sensitivity['product_code'].astype(str).tolist())}",
+    )
+    return pd.DataFrame(tests)
+
+
+def build_siri_validation_log(siri_index: pd.DataFrame) -> str:
+    zero_total_rows = int((siri_index["total_import_value_kusd"] == 0).sum())
+    constant_norm_dimensions = []
+    min_max_lines = []
+    for component in ["concentration", "policy_exposure", "alternative_insufficiency", "structural_volatility"]:
+        raw = f"{component}_raw"
+        raw_min = float(siri_index[raw].min())
+        raw_max = float(siri_index[raw].max())
+        if raw_min == raw_max:
+            constant_norm_dimensions.append(raw)
+        min_max_lines.append(f"- {raw}: min={raw_min:.6f}, max={raw_max:.6f}")
+    missing_or_zero_us_rows = int((siri_index["policy_exposure_raw"] == 0).sum())
+    return "\n".join(
+        [
+            "# SIRI validation-v0.2",
+            "",
+            f"- Rows: {len(siri_index)}",
+            f"- Zero total product-year rows: {zero_total_rows}",
+            f"- Product-year rows with missing USA record or zero US policy exposure: {missing_or_zero_us_rows}",
+            f"- Raw dimensions with min=max: {constant_norm_dimensions if constant_norm_dimensions else 'none'}",
+            "- Raw component ranges:",
+            *min_max_lines,
+            "",
+        ]
+    )
+
+
+def write_siri_validation_log(siri_index: pd.DataFrame, config: AnalysisConfig) -> None:
+    target = config.docs_output_dir / "siri_validation_v0.2.md"
+    target.write_text(build_siri_validation_log(siri_index), encoding="utf-8")
+
+
 def build_test_results(
     products: pd.DataFrame,
     positive_trades: pd.DataFrame,
