@@ -8,9 +8,14 @@ scripts/v01_analysis/__pycache__
 *.pyd
 .pytest_cache/
 .mypy_cache/
-docs/*
 docs/output/log*.md
-!docs/output/
+
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
 
 .mplconfig/
 
