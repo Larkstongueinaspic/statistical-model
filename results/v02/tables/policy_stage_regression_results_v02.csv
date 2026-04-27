@@ -1,0 +1,4 @@
+model,sample,dependent_variable,term,coef,std_error,p_value,ci_low,ci_high,nobs,r_squared,approx_pct_effect
+pooled_stage_ln,all_selected_products,ln_import_value,US_Post2018,0.17663,0.470759,0.707509,-0.74604,1.0993,10608,0.872752,0.19319
+pooled_stage_ln,all_selected_products,ln_import_value,US_Post2022,0.025674,0.929935,0.977975,-1.796966,1.848313,10608,0.872752,0.026006
+pooled_stage_ln,all_selected_products,ln_import_value,US_Post2023,-0.131146,1.05002,0.900604,-2.189147,1.926855,10608,0.872752,-0.12291

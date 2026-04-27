@@ -3,8 +3,8 @@
 Dep. Variable:     asinh_import_value   R-squared:                       0.878
 Model:                            OLS   Adj. R-squared:                  0.868
 Method:                 Least Squares   F-statistic:                     606.1
-Date:                Sun, 19 Apr 2026   Prob (F-statistic):               0.00
-Time:                        18:06:49   Log-Likelihood:                -2067.8
+Date:                Mon, 27 Apr 2026   Prob (F-statistic):               0.00
+Time:                        14:39:59   Log-Likelihood:                -2067.8
 No. Observations:                1020   AIC:                             4290.
 Df Residuals:                     943   BIC:                             4669.
 Df Model:                          76                                         

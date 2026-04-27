@@ -1,0 +1,5 @@
+| model                      | sample                | dependent_variable | term                | coef     | std_error | p_value  | ci_low    | ci_high  | nobs  | r_squared | approx_pct_effect |
+| -------------------------- | --------------------- | ------------------ | ------------------- | -------- | --------- | -------- | --------- | -------- | ----- | --------- | ----------------- |
+| mutually_exclusive_periods | all_selected_products | ln_import_value    | US_Period_2018_2021 | 0.17663  | 0.470759  | 0.707509 | -0.74604  | 1.0993   | 10608 | 0.872752  | 0.19319           |
+| mutually_exclusive_periods | all_selected_products | ln_import_value    | US_Period_2022      | 0.202304 | 0.846075  | 0.811021 | -1.455973 | 1.860582 | 10608 | 0.872752  | 0.22422           |
+| mutually_exclusive_periods | all_selected_products | ln_import_value    | US_Period_2023_2024 | 0.071158 | 0.677772  | 0.916385 | -1.257252 | 1.399567 | 10608 | 0.872752  | 0.073751          |

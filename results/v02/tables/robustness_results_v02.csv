@@ -1,0 +1,10 @@
+model,sample,dependent_variable,term,coef,std_error,p_value,ci_low,ci_high,nobs,r_squared,approx_pct_effect
+robust_asinh,all_selected_products,asinh_import_value,US_Post2018,0.161557,0.493406,0.743341,-0.805501,1.128616,10608,0.867664,
+robust_asinh,all_selected_products,asinh_import_value,US_Post2022,0.043018,0.972332,0.964712,-1.862717,1.948753,10608,0.867664,
+robust_asinh,all_selected_products,asinh_import_value,US_Post2023,-0.119322,1.095397,0.913257,-2.26626,2.027616,10608,0.867664,
+robust_drop_2020_2021,all_selected_products,ln_import_value,US_Post2018,0.174222,0.618645,0.778236,-1.0383,1.386743,9360,0.872983,0.19032
+robust_drop_2020_2021,all_selected_products,ln_import_value,US_Post2022,0.028082,1.017893,0.97799,-1.966951,2.023116,9360,0.872983,0.02848
+robust_drop_2020_2021,all_selected_products,ln_import_value,US_Post2023,-0.131146,1.058041,0.901353,-2.204869,1.942577,9360,0.872983,-0.12291
+robust_top10_2024_sources,top10_2024_sources_plus_us,ln_import_value,US_Post2018,-0.317952,0.363741,0.382055,-1.030871,0.394967,680,0.563008,-0.272362
+robust_top10_2024_sources,top10_2024_sources_plus_us,ln_import_value,US_Post2022,-0.273874,0.72227,0.70455,-1.689497,1.141749,680,0.563008,-0.239572
+robust_top10_2024_sources,top10_2024_sources_plus_us,ln_import_value,US_Post2023,-0.126998,0.841616,0.880056,-1.776535,1.522539,680,0.563008,-0.119265

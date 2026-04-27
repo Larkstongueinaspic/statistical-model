@@ -3,8 +3,8 @@
 Dep. Variable:        ln_import_value   R-squared:                       0.887
 Model:                            OLS   Adj. R-squared:                  0.878
 Method:                 Least Squares   F-statistic:                     620.5
-Date:                Sun, 19 Apr 2026   Prob (F-statistic):               0.00
-Time:                        18:06:49   Log-Likelihood:                -1971.8
+Date:                Mon, 27 Apr 2026   Prob (F-statistic):               0.00
+Time:                        14:39:59   Log-Likelihood:                -1971.8
 No. Observations:                1020   AIC:                             4098.
 Df Residuals:                     943   BIC:                             4477.
 Df Model:                          76                                         

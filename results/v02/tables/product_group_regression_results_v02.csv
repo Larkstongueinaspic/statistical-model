@@ -1,0 +1,7 @@
+model,sample,dependent_variable,term,coef,std_error,p_value,ci_low,ci_high,nobs,r_squared,approx_pct_effect
+group_equipment_stage_ln,equipment,ln_import_value,US_Post2018,0.190535,0.308762,0.537174,-0.414629,0.795698,1020,0.886976,0.209896
+group_equipment_stage_ln,equipment,ln_import_value,US_Post2022,0.421403,0.33746,0.211757,-0.240007,1.082813,1020,0.886976,0.524098
+group_equipment_stage_ln,equipment,ln_import_value,US_Post2023,-0.185273,0.2762,0.502351,-0.726615,0.356068,1020,0.886976,-0.169123
+group_integrated_circuit_stage_ln,integrated_circuit,ln_import_value,US_Post2018,-0.018046,0.325656,0.955807,-0.656321,0.620228,9588,0.907675,-0.017885
+group_integrated_circuit_stage_ln,integrated_circuit,ln_import_value,US_Post2022,-0.013413,0.579308,0.981528,-1.148835,1.122009,9588,0.907675,-0.013324
+group_integrated_circuit_stage_ln,integrated_circuit,ln_import_value,US_Post2023,-0.174218,0.659619,0.791688,-1.467047,1.118611,9588,0.907675,-0.159886

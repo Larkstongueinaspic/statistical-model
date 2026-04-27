@@ -1,7 +1,8 @@
 # 快速入门
 
 测试前请先部署 BACI—HS07 数据库！
-运行以下代码获得压缩包并在文件夹内解压：
+运行以下代码获得压缩包并在项目根目录内解压：
+
 ```bash
 wget https://www.cepii.fr/DATA_DOWNLOAD/baci/data/BACI_HS07_V202601.zip
 unzip BACI_HS07_V202601.zip
@@ -10,74 +11,106 @@ unzip BACI_HS07_V202601.zip
 然后创建 Python 虚拟环境后安装 `requirements.txt` 依赖。
 
 这是一个围绕“中国自美国进口半导体相关产品是否发生变化”展开的小型数据分析项目。  
-当前版本的重点不是复杂建模，而是先把一条稳定、可复现的分析流水线跑通。
+当前版本的重点仍然不是复杂建模，而是把一条稳定、可复现、能支撑论文初稿实证章节的分析流水线跑通。
 
-目前已经完成的是 v0.1：
+目前已经完成到 v0.2：
 
 - 题目锁定为“美国出口管制对中国半导体相关产品进口的影响研究”
-- 主样本先做 `HS6=848620`。`id=848620`是`Machines and apparatus of a kind used solely or principally for the manufacture of semiconductor devices or of electronic integrated circuits`，其他id可以在数据库里的`product_codes_HS07_V202601.csv`看到
 - 数据源固定为 `BACI HS07 2008-2024`
-- 已经具备从原始数据到图表、回归表和测试结果的完整脚本
+- v0.1 已完成单产品 `HS6=848620`
+- v0.2 已扩展到四个半导体相关产品：
+  - `848620`：半导体器件或集成电路制造设备
+  - `854231`：处理器及控制器
+  - `854232`：存储器
+  - `854239`：其他电子集成电路
+- 已经具备从原始数据到多产品清洗数据、图表、回归表、稳健性检查和测试结果的完整脚本
+
+产品含义以数据库里的 `BACI_HS07_V202601/product_codes_HS07_V202601.csv` 为准。
 
 ## 1. 概况
 
 可以简单理解成一条数据流水线：
 
-1. 从 BACI 原始贸易数据中筛出目标样本
+1. 从 BACI 原始贸易数据中筛出中国进口的半导体相关产品
 2. 整理成适合画图和分析的结构化表格
-3. 输出描述统计图表
-4. 运行一个最小可行的基准回归和两项稳健性检查
-5. 生成结果表、日志和阶段总结
+3. 输出多产品描述统计图表
+4. 运行带 `Post2018 / Post2022 / Post2023` 的固定效应回归
+5. 补充分产品、产品组、份额型结果和稳健性检查
+6. 生成结果表、日志、阶段总结和结果摘要
 
 如果你没有统计或建模背景，先把它理解成：
-一个 Python 数据工程 + 基础分析的小项目，不是一个复杂算法项目。
+一个 Python 数据工程 + 基础实证分析的小项目，不是一个复杂算法项目。
 
-## 2. 目录结构
+## 2. 当前主要结果
+
+v0.2 的核心结论比 v0.1 更完整：
+
+- `848620` 的美国份额从 `2017` 年 `27.92%` 降到 `2024` 年 `9.88%`
+- `854231` 的美国份额从 `2017` 年 `12.47%` 降到 `2024` 年 `9.72%`
+- `854232` 的美国份额从 `2017` 年 `0.95%` 降到 `2024` 年 `0.14%`
+- `854239` 的美国份额从 `2017` 年 `2.82%` 升到 `2024` 年 `3.94%`，说明集成电路类产品并不是完全同向变化
+- 多产品绝对额回归中，`US_Post2018 / US_Post2022 / US_Post2023` 均不显著
+- 份额型结果方向偏负但不显著，更适合作为“美国份额承压”的补充展示，而不是强因果证据
+
+当前最稳妥的写法是：
+
+> 描述统计支持中国半导体相关产品进口来源结构发生重组，美国份额在设备和部分集成电路产品中下降；但简化固定效应模型仍不能支持“美国出口额显著下降”的强因果表述。
+
+## 3. 目录结构
 
 ```text
 .
 ├── README.md
 ├── requirements.txt
 ├── docs/
-│   └── output/       # 工作日志、结果摘要、阶段总结
+│   ├── project/       # 论文框架和工作栈
+│   ├── prompts/       # v0.1 / v0.2 执行 prompt
+│   └── output/        # 工作日志、结果摘要、阶段总结
 ├── scripts/
 │   ├── run_v01_analysis.py
-│   └── v01_analysis/
-│       ├── config.py
-│       ├── datasets.py
-│       ├── models.py
-│       ├── plots.py
-│       ├── runner.py
-│       ├── storage.py
-│       └── validation.py
-├── results/          # 运行后生成的数据、图表、表格
+│   ├── run_v02_analysis.py
+│   ├── v01_analysis/  # v0.1 单产品流程
+│   └── v02_analysis/  # v0.2 多产品流程
+├── results/
+│   ├── v01/           # v0.1 单产品数据、图表、表格输出
+│   └── v02/           # v0.2 数据、图表、表格输出
 └── BACI_HS07_V202601/ # 原始 BACI 数据（本地大文件，不建议纳入版本控制）
 ```
 
-## 3. 核心模块分工
+## 4. 核心模块分工
+
+v0.2 当前是主线。
+
+- `scripts/run_v02_analysis.py`
+  主入口。想跑完整个 v0.2 流程时，直接运行这个文件。
+
+- `scripts/v02_analysis/config.py`
+  放路径、年份范围、候选产品编码、国家代码等配置。
+
+- `scripts/v02_analysis/datasets.py`
+  负责读取 BACI 原始数据、做候选产品筛查、构造多产品面板、年度汇总和主要来源国表。
+
+- `scripts/v02_analysis/models.py`
+  负责分阶段政策节点回归、份额型结果、分产品回归、产品组回归和稳健性检查。
+
+- `scripts/v02_analysis/plots.py`
+  负责输出多产品总进口、美国进口、美国份额、2024 来源结构、HHI 和产品组图。
+
+- `scripts/v02_analysis/validation.py`
+  负责自动检查产品元数据、年份覆盖、样本口径、面板行数、政策变量、图表表格一致性和回归样本数。
+
+- `scripts/v02_analysis/reports.py`
+  负责生成 `summary_v0.2.md` 和 `abstract_v0.2.md`。
+
+- `scripts/v02_analysis/storage.py`
+  负责把 CSV、Markdown 表和文本结果写入 `results/v02/`。
+
+v0.1 仍然保留，用于复现单产品基线：
 
 - `scripts/run_v01_analysis.py`
-  主入口。想跑完整个 v0.1 流程时，直接运行这个文件。
+- `scripts/v01_analysis/`
 
-- `scripts/v01_analysis/config.py`
-  放路径、年份范围、产品编码等配置。
-
-- `scripts/v01_analysis/datasets.py`
-  负责读取 BACI 原始数据、筛选目标样本、构造平衡面板和描述性表格。
-
-- `scripts/v01_analysis/models.py`
-  负责基准回归与稳健性回归。
-
-- `scripts/v01_analysis/plots.py`
-  负责把汇总后的数据画成趋势图、份额图和 HHI 图。
-
-- `scripts/v01_analysis/validation.py`
-  负责自动检查样本是否完整、图表与表格是否一致、回归样本数是否合理。
-
-- `scripts/v01_analysis/storage.py`
-  负责把 CSV、Markdown 表和文本结果写入 `results/`。
-
-## 4. 环境准备
+## 5. 环境准备
 
 ```bash
 python3 -m venv .venv
@@ -85,35 +118,53 @@ python3 -m venv .venv
 pip install -r requirements.txt
 ```
 
-## 5. 运行
+## 6. 运行
 
-确保原始数据目录 `BACI_HS07_V202601/` 已放在项目根目录后，执行：
+确保原始数据目录 `BACI_HS07_V202601/` 已放在项目根目录后，执行 v0.2：
+
+```bash
+.venv/bin/python scripts/run_v02_analysis.py
+```
+
+运行完成的主要输出在：
+
+- `results/v02/data/`
+- `results/v02/figures/`
+- `results/v02/tables/`
+
+文档类输出在：
+
+- `docs/output/log_v0.2.md`
+- `docs/output/summary_v0.2.md`
+- `docs/output/abstract_v0.2.md`
+
+如果需要复现 v0.1 单产品基线，执行：
 
 ```bash
 .venv/bin/python scripts/run_v01_analysis.py
 ```
 
-运行完成的主要输出在：
+v0.1 输出仍在：
 
-- `results/data/`
-- `results/figures/`
-- `results/tables/`
-
-文档类输出在：
-
-- `docs/output/abstract_v0.1.md`
+- `results/v01/data/`
+- `results/v01/figures/`
+- `results/v01/tables/`
 - `docs/output/summary_v0.1.md`
+- `docs/output/abstract_v0.1.md`
 
-## 6. 当前分析范围
+## 7. 当前分析范围
 
-v0.1 故意做得很小，目的是先跑通：
+v0.2 仍然保持小而稳，主要做：
 
-- 只做一个产品：`848620`
-- 只做年度数据：`2008-2024`
-- 只做一个最基础的政策节点：`2018`
-- 只做一个最基础的比较模型
+- 进口国固定为中国
+- 年份固定为 `2008-2024`
+- 产品固定为 `848620 / 854231 / 854232 / 854239`
+- 政策节点使用 `Post2018 / Post2022 / Post2023`
+- 观察单元为 `出口国 × 产品 × 年份`
+- 未出现的产品-出口国-年份贸易流按 `0` 填充
+- 模型以固定效应回归、份额型结果和稳健性检查为主
 
-当前不急着做：
+当前仍然不急着做：
 
 - GDELT
 - Goldstein 冲突量表
@@ -121,28 +172,38 @@ v0.1 故意做得很小，目的是先跑通：
 - 图神经网络
 - 全球预警平台
 - 复杂因果识别设计
+- 大量外部控制变量
 
-## 7. 上手顺序
+## 8. 上手顺序
 
 如果刚接手，建议按这个顺序看：
 
 1. 先读 `docs/project/最小可行论文框架.md`
 2. 再读 `docs/project/工作栈.md`
-3. 跑一遍 `scripts/run_v01_analysis.py`
-4. 看 `scripts/v01_analysis/config.py` 和 `runner.py`
-5. 再看 `datasets.py`，理解样本是怎么整理出来的
-6. 最后再看 `models.py` 和 `plots.py`
+3. 看 `docs/output/summary_v0.2.md`
+4. 跑一遍 `scripts/run_v02_analysis.py`
+5. 看 `scripts/v02_analysis/config.py` 和 `runner.py`
+6. 再看 `datasets.py`，理解多产品样本是怎么整理出来的
+7. 最后看 `models.py`、`plots.py` 和 `validation.py`
 
-## 8. 下一步做什么
+如果只想理解 v0.1 与 v0.2 的区别：
+
+1. 先读 `docs/output/summary_v0.1.md`
+2. 再读 `docs/output/summary_v0.2.md`
+3. 对比 `scripts/run_v01_analysis.py` 和 `scripts/run_v02_analysis.py`
+
+## 9. 下一步做什么
 
 最自然的扩展方向：
 
-1. 从单产品扩展到 `2-3` 个产品
-2. 把政策节点从 `2018` 扩展到 `2022/2023`
-3. 优化脚本配置和输出组织，让多产品版本更容易跑
+1. 补一张政策事件时间线图，明确 `2018 / 2022 / 2023` 节点的制度含义
+2. 对主要来源国做地区或产业链分组，解释设备类和集成电路类的替代来源差异
+3. 做简单事件研究式图表，展示美国相对主要来源国的年份变化
+4. 如果继续加强识别，优先考虑出口国-产品固定效应或更清晰的对照组，而不是马上引入复杂外部数据
 
-## 9. 注意事项
+## 10. 注意事项
 
 - BACI 原始数据体量较大，脚本已经按分块读取处理，不要轻易改成整文件一次性读入。
-- 当前 `results/` 和原始数据目录默认不进 Git。
-- 如果要改样本范围，改 `config.py`，不要在多个文件里手工改常量。
+- v0.1 输出和 v0.2 输出是分开的，v0.1 统一写入 `results/v01/`，v0.2 统一写入 `results/v02/`。
+- 如果要改样本范围，优先改 `scripts/v02_analysis/config.py`，不要在多个文件里手工改常量。
+- 当前结论不能写成“美国出口管制已经显著压低中国自美国进口额”。更稳妥的说法是“来源结构重组、美国份额在多数核心产品中承压，但简化模型不支持强因果结论”。
