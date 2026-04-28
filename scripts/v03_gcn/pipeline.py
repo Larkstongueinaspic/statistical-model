@@ -7,6 +7,7 @@ import pandas as pd
 from .baselines import evaluate_predictions, run_naive_baseline, run_ridge_baseline
 from .config import GcnConfig
 from .siri_targets import build_siri_targets
+from .training import run_numpy_gcn_regressor
 from .trade_graphs import build_graph_level_features, build_graph_samples
 
 
@@ -51,7 +52,8 @@ def run_baci_only_pipeline(panel: pd.DataFrame, config: GcnConfig) -> PipelineOu
     else:
         naive = run_naive_baseline(graph_features)
         ridge = run_ridge_baseline(graph_features)
-        predictions = pd.concat([naive, ridge], ignore_index=True)
+        gcn_numpy = run_numpy_gcn_regressor(samples)
+        predictions = pd.concat([naive, ridge, gcn_numpy], ignore_index=True)
         metrics = evaluate_predictions(predictions, uses_gdelt=False)
     return PipelineOutputs(
         siri_targets=siri_targets,

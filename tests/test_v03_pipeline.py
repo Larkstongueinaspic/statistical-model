@@ -55,6 +55,7 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(outputs.metrics.empty)
         self.assertIn("naive", set(outputs.predictions["model"]))
         self.assertIn("ridge", set(outputs.predictions["model"]))
+        self.assertIn("gcn_numpy", set(outputs.predictions["model"]))
         self.assertTrue((outputs.gdelt_pressure["gdelt_pressure_score"] == 0.0).all())
 
 

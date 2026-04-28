@@ -78,6 +78,7 @@ def _gdelt_lookup(gdelt_pressure: pd.DataFrame) -> pd.DataFrame:
 
 
 def _product_group_one_hot(product_group: str) -> dict[str, int]:
+    product_group = _normalise_product_group(product_group)
     mapping = {
         "semiconductor_equipment": "product_group_semiconductor_equipment",
         "semiconductor_devices": "product_group_semiconductor_devices",
@@ -85,6 +86,14 @@ def _product_group_one_hot(product_group: str) -> dict[str, int]:
         "related_hardware": "product_group_related_hardware",
     }
     return {column: int(column == mapping.get(product_group, "")) for column in PRODUCT_GROUP_COLUMNS}
+
+
+def _normalise_product_group(product_group: str) -> str:
+    legacy = {
+        "equipment": "semiconductor_equipment",
+        "integrated_circuit": "integrated_circuits",
+    }
+    return legacy.get(product_group, product_group)
 
 
 def _build_edges(source_count: int, config: GcnConfig) -> tuple[np.ndarray, np.ndarray]:
@@ -141,7 +150,7 @@ def build_graph_samples(
             continue
         sample_id = f"{product_code}-{year}"
         target_year = year + 1
-        product_group = str(group["product_group"].iloc[0]) if "product_group" in group.columns else ""
+        product_group = _normalise_product_group(str(group["product_group"].iloc[0])) if "product_group" in group.columns else ""
         target_row = target.loc[(target["product_code"] == product_code) & (target["target_year"] == target_year)]
         current_row = current.loc[(current["product_code"] == product_code) & (current["graph_year"] == year)]
         if target_row.empty or current_row.empty:
