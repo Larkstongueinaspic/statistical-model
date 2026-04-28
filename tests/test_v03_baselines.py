@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 
 import pandas as pd
 
@@ -74,6 +75,19 @@ class BaselineTests(unittest.TestCase):
         self.assertEqual(set(predictions["model"]), {"ridge"})
         self.assertEqual(set(predictions["sample_id"]), set(feature_table()["sample_id"]))
         self.assertFalse(predictions["predicted_siri"].isna().any())
+
+    def test_evaluate_predictions_returns_nan_spearman_for_constant_series_without_warning(self) -> None:
+        predictions = run_naive_baseline(feature_table().assign(target_siri=10.0))
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            metrics = evaluate_predictions(predictions, uses_gdelt=False)
+
+        self.assertEqual(caught, [])
+        train_all = metrics.loc[
+            (metrics["split"] == "train") & (metrics["sample_scope"] == "all_model_products")
+        ].iloc[0]
+        self.assertTrue(pd.isna(train_all["spearman_rank_corr"]))
 
 
 if __name__ == "__main__":

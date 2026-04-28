@@ -90,6 +90,8 @@ def run_ridge_baseline(features: pd.DataFrame, ridge_alpha: float = 1.0) -> pd.D
 def _spearman(actual: pd.Series, predicted: pd.Series) -> float:
     if len(actual) < 2:
         return math.nan
+    if actual.nunique(dropna=True) < 2 or predicted.nunique(dropna=True) < 2:
+        return math.nan
     actual_rank = actual.rank(method="average")
     predicted_rank = predicted.rank(method="average")
     corr = actual_rank.corr(predicted_rank)
