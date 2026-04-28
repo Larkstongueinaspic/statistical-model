@@ -146,8 +146,10 @@ product_code, train_year, target_year, actual_siri, predicted_siri, error
 
 ```text
 sample_id, product_code, graph_year, target_year, node_count,
-edge_count, target_siri, split, status, skip_reason
+edge_count, source_edge_count, target_siri, split, status, skip_reason
 ```
+
+`edge_count` 表示进入 GCN 张量后的边数，包含反向边和 self-loop。`source_edge_count` 表示原始来源国正贸易边数，用于诊断图规模。
 
 ## 5. GDELT 特征
 
@@ -170,7 +172,8 @@ GoldsteinScale, NumMentions, AvgTone
 可选输入字段：
 
 ```text
-EventRootCode, EventBaseCode, SOURCEURL, Actor1Name, Actor2Name
+EventRootCode, EventBaseCode, SOURCEURL, DocumentIdentifier,
+EventText, Actor1Name, Actor2Name
 ```
 
 v0.3 的主题过滤只有两种固定模式：默认使用外部预筛选后的 GDELT CSV；或显式开启内置关键词过滤。如果没有文本字段，不在 v0.3 内二次做主题过滤，报告中标记为“pre-filtered GDELT events”。
@@ -339,10 +342,12 @@ n_samples, n_products, uses_gdelt
 `gcn_predictions.csv` schema：
 
 ```text
-model, split, product_code, product_group, is_core_product,
+model, split, sample_id, product_code, product_group, is_core_product,
 train_year, target_year, actual_siri, predicted_siri, error,
 uses_gdelt
 ```
+
+若某个 split 或 `sample_scope` 的样本数少于 2，Spearman rank correlation 置空，并在验证表记录 `spearman_undefined_insufficient_samples`。若验证集或测试集为空，对应指标行仍输出，`n_samples=0`，指标置空，训练流程标记为失败而不是静默成功。
 
 ## 7. 代码结构
 
