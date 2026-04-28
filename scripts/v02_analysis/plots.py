@@ -144,6 +144,31 @@ def plot_product_group_comparison(annual: pd.DataFrame, config: AnalysisConfig) 
     plt.close(fig)
 
 
+def plot_siri_trend(siri_index: pd.DataFrame, config: AnalysisConfig) -> None:
+    plt, _ = configure_matplotlib(config)
+    fig, ax = plt.subplots(figsize=(11, 6.2))
+    for product_code, group in siri_index.groupby("product_code"):
+        group = group.sort_values("year")
+        ax.plot(
+            group["year"],
+            group["siri_score"],
+            label=f"HS{product_code}",
+            linewidth=2.2,
+            color=PRODUCT_COLORS.get(str(product_code), None),
+        )
+    _add_policy_lines(ax)
+    ax.set_title("SIRI risk index by selected semiconductor-related product")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("SIRI score")
+    ax.set_xticks(config.years[::2])
+    ax.set_ylim(0, 100)
+    ax.grid(alpha=0.25, linestyle=":")
+    ax.legend(frameon=False, ncol=2)
+    fig.tight_layout()
+    fig.savefig(config.figure_output_dir / "siri_trend_by_product_v02.png", dpi=220)
+    plt.close(fig)
+
+
 def create_all_figures(annual: pd.DataFrame, top_2024: pd.DataFrame, config: AnalysisConfig) -> None:
     plot_product_lines(
         annual,

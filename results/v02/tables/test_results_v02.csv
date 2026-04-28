@@ -19,3 +19,18 @@ result,Post2018/Post2022/Post2023 terms enter pooled policy model,PASS,"Terms: [
 result,Pooled policy regression sample size is reasonable,PASS,"Regression nobs: 10608, panel rows: 10608"
 result,Product-specific regressions cover all selected products,PASS,"Product regression samples: ['HS848620', 'HS854231', 'HS854232', 'HS854239']"
 result,Candidate feasibility table records metadata status,PASS,All candidate products found in metadata.
+siri,SIRI output has required columns,PASS,"Columns: ['product_code', 'product_name', 'year', 'total_import_value_kusd', 'concentration_raw', 'policy_exposure_raw', 'alternative_insufficiency_raw', 'structural_volatility_raw', 'concentration_norm', 'policy_exposure_norm', 'alternative_insufficiency_norm', 'structural_volatility_norm', 'siri_score', 'siri_score_policy_weighted']"
+siri,SIRI product-year row count matches selected products,PASS,"Observed rows: 68, expected rows: 68"
+siri,SIRI years cover configured range,PASS,"Years: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]"
+siri,Each SIRI product covers every configured year,PASS,"Coverage: {'848620': 17, '854231': 17, '854232': 17, '854239': 17}"
+siri,SIRI scores stay within 0-100,PASS,Checked baseline SIRI score bounds.
+siri,Policy-weighted SIRI scores stay within 0-100,PASS,Checked policy-weighted SIRI score bounds.
+siri,SIRI normalized components stay within 0-1,PASS,"Norm columns: ['concentration_norm', 'policy_exposure_norm', 'alternative_insufficiency_norm', 'structural_volatility_norm']"
+siri,SIRI required fields are non-missing,PASS,Checked required fields for missing values.
+siri,SIRI ranking has required columns,PASS,"Columns: ['rank', 'product_code', 'product_name', 'year', 'siri_score', 'siri_score_policy_weighted', 'rank_policy_weighted', 'rank_change']"
+siri,SIRI ranking covers all selected products,PASS,Rows: 4
+siri,SIRI ranking product set matches configured products,PASS,"Products: ['848620', '854231', '854232', '854239']"
+siri,SIRI ranking ranks are unique,PASS,Checked baseline and policy-weighted ranks.
+siri,SIRI sensitivity has required columns,PASS,"Columns: ['product_code', 'product_name', 'baseline_rank', 'policy_weighted_rank', 'rank_change', 'baseline_siri_score', 'policy_weighted_siri_score']"
+siri,SIRI sensitivity covers all selected products,PASS,Rows: 4
+siri,SIRI sensitivity product set matches configured products,PASS,"Products: ['848620', '854231', '854232', '854239']"

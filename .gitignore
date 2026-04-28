@@ -2,15 +2,22 @@
 venv/
 
 __pycache__/
-scripts/v01_analysis/__pycache__
 *.py[cod]
 *.pyo
 *.pyd
 .pytest_cache/
 .mypy_cache/
-docs/*
 docs/output/log*.md
-!docs/output/
+docs/history
+docs/project
+docs/prompts
+
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
 
 .mplconfig/
 
