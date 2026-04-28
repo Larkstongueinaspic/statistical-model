@@ -1,0 +1,5 @@
+category,check,passed,details
+product_pool,model product count meets threshold,0,"model_products=0, threshold=10"
+graphs,labeled graph count meets threshold,0,"usable_graphs=64, threshold=100"
+gdelt,GDELT status is explicit,1,disabled_baci_only
+metrics,metrics table has rows,1,metric_rows=12

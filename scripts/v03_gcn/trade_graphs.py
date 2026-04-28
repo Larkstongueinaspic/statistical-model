@@ -126,8 +126,11 @@ def build_graph_samples(
     config: GcnConfig,
 ) -> tuple[list[GraphSample], pd.DataFrame]:
     positive = panel.loc[panel["import_value_kusd"] > 0].copy()
+    positive["product_code"] = positive["product_code"].astype(str)
     target = _target_lookup(targets)
+    target["product_code"] = target["product_code"].astype(str)
     current = _current_siri_lookup(targets)
+    current["product_code"] = current["product_code"].astype(str)
     gdelt = _gdelt_lookup(gdelt_pressure)
     samples: list[GraphSample] = []
     index_rows: list[dict[str, object]] = []

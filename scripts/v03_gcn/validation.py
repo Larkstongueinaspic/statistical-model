@@ -14,7 +14,10 @@ def build_validation_results(
 ) -> pd.DataFrame:
     rows = []
 
-    model_products = product_pool.loc[product_pool["model_status"] == "model"]
+    if "model_status" in product_pool.columns:
+        model_products = product_pool.loc[product_pool["model_status"] == "model"]
+    else:
+        model_products = pd.DataFrame()
     rows.append(
         {
             "category": "product_pool",
@@ -52,4 +55,3 @@ def build_validation_results(
         }
     )
     return pd.DataFrame(rows)
-

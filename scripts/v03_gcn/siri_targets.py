@@ -3,7 +3,10 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from scripts.v02_analysis.risk_index import build_siri_outputs
+try:
+    from scripts.v02_analysis.risk_index import build_siri_outputs
+except ModuleNotFoundError:
+    from v02_analysis.risk_index import build_siri_outputs
 
 
 def build_siri_targets(panel: pd.DataFrame) -> pd.DataFrame:
