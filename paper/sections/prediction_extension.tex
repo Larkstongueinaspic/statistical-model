@@ -2,6 +2,27 @@
 
 前文 v0.2 分析主要回答两个问题：一是中国半导体相关产品进口来源结构如何变化，二是这些结构变化如何反映在 SIRI 供应链风险指数及其解释性回归中。作为进一步扩展，v0.3 将问题推进到预测层面：如果已经观察到某一年产品的进口来源网络和风险特征，能否对下一年的 SIRI 风险水平形成可检验的预测。这一部分不替代前文的描述统计和回归主线，而是检验 SIRI 是否可以从事后评价指标扩展为下一年风险预测任务。
 
+图 \ref{fig:v03-workflow} 概括了 v0.3 从 BACI 贸易数据到下一年 SIRI 预测评估的流程。
+
+\begin{figure}[H]
+    \centering
+    \setlength{\fboxsep}{8pt}
+    \fbox{%
+    \begin{minipage}{0.92\textwidth}
+    \centering
+    \small
+    \begin{tabular}{@{}>{\centering\arraybackslash}p{0.20\linewidth} c >{\centering\arraybackslash}p{0.22\linewidth} c >{\centering\arraybackslash}p{0.22\linewidth}@{}}
+    \textbf{BACI 贸易数据} & $\rightarrow$ & \textbf{20 个 HS6 产品池} & $\rightarrow$ & \textbf{年度进口来源网络} \\
+    &&&&\\[-0.4em]
+    \textbf{SIRI 年度标签} & $\leftarrow$ & \textbf{产品--年份图样本} & $\rightarrow$ & \textbf{下一年风险预测} \\
+    &&&&\\[-0.4em]
+    \multicolumn{5}{c}{\textbf{Naive / Ridge / 贸易网络原型} $\rightarrow$ \textbf{预测误差与排序相关性评估}}
+    \end{tabular}
+    \end{minipage}}
+    \caption{v0.3 贸易网络预测扩展流程}
+    \label{fig:v03-workflow}
+\end{figure}
+
 在数据与网络构造上，v0.3 将产品范围从前文重点讨论的核心 4 个 HS6 产品扩展到 20 个半导体相关 HS6 产品。对每一个产品和每一个年份，本文构造一张中国进口来源网络：节点包括中国以及该年向中国出口该产品的来源国，边表示来源国向中国的出口关系，边权定义为该来源国在中国该产品年度进口额中的份额。因此，一个产品--年份对应一个年度图样本，图结构刻画的是进口来源集中度、来源国组合以及不同来源国在中国进口中的相对权重。样本规模与时间切分见表 \ref{tab:v03-overview}。
 
 \input{tables/v03_prediction_overview}
