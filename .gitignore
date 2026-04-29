@@ -8,6 +8,9 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 docs/output/log*.md
+docs/history
+docs/project
+docs/prompts
 
 paper/*.aux
 paper/*.bbl
