@@ -1,0 +1,343 @@
+% !TEX program = xelatex
+\documentclass[UTF8,a4paper,12pt]{ctexart}
+
+%================== 宏包 ==================
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{titling}
+
+%================== 页面与格式 ==================
+\geometry{left=2.8cm,right=2.8cm,top=2.6cm,bottom=2.6cm}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black}
+\graphicspath{{figures/}}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\linespread{1.18}
+\setlist{nosep,leftmargin=2em}
+\captionsetup{font=small,labelfont=bf,labelsep=space}
+\captionsetup[table]{position=top}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\headheight}{14pt}
+
+\renewcommand\thesection{\chinese{section}}
+\renewcommand\thesubsection{（\chinese{subsection}）}
+\renewcommand\thesubsubsection{\arabic{subsubsection}.}
+
+\titleformat{\section}{\centering\bfseries\large}{\thesection、}{0pt}{}
+\titleformat{\subsection}{\bfseries\normalsize}{\thesubsection}{0pt}{}
+\titleformat{\subsubsection}{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2ex plus .2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{0.8ex plus .2ex}{0.4ex}
+\titlespacing*{\subsubsection}{0pt}{0.6ex plus .2ex}{0.3ex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small \papertitle}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%================== 信息（提交前补全） ==================
+\newcommand{\papertitle}{大国博弈下中国半导体相关产品进口来源结构演化与供应链风险评估研究}
+\newcommand{\school}{最终提交前由参赛队填写}
+\newcommand{\teamname}{最终提交前由参赛队填写}
+\newcommand{\members}{最终提交前由参赛队填写}
+\newcommand{\advisor}{最终提交前由参赛队填写}
+
+\title{\textbf{\papertitle} \\[1ex]
+\large ——基于BACI微观测算、SIRI风险指数与统计边界的实证分析}
+\author{\school \\ \teamname \\[1ex] 成员：\members \\[1ex] 指导教师：\advisor}
+\date{2026年}
+
+\newcommand{\paperabstract}[2]{%
+  \begin{center}
+  {\bfseries\large 摘\quad 要}
+  \end{center}
+  \vspace{0.5ex}
+  #1
+  \vspace{0.8ex}
+
+  \noindent\textbf{关键词：}#2
+}
+
+\begin{document}
+
+%================== 封面 ==================
+\maketitle
+\thispagestyle{empty}
+\clearpage
+
+%================== 摘要 ==================
+\paperabstract{%
+（此处填写摘要正文，与你们现有摘要内容一致。摘要应紧扣研究背景、数据来源、模型方法、核心结果和结论边界，避免把探索性扩展写成强因果结论。）
+}{大国博弈；半导体；进口来源结构；供应链风险；风险指数；统计建模}
+
+\clearpage
+
+%================== 目录 ==================
+\tableofcontents
+\clearpage
+
+%================== 一、绪论 ==================
+\section{绪论}
+
+\subsection{研究背景与问题提出}
+% 【说明】本部分内容已存在于你们的 section/introduction 中，直接嵌入即可
+% --- 保留你们原文的三段式：半导体重要性 → 政策时间线（2018/2022/2023）→ 三个研究问题
+
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 半导体在经济安全中的角色
+    \item 政策时间线梳理（实体清单→2022新规→芯片法案→2023持续收紧）
+    \item 明确三个核心问题：结构是否变？不同产品是否异质？能否构建可复现指标？
+\end{itemize}
+
+\subsection{文献综述}
+% 【说明】你们原文没有单独文献综述，但从完整论文结构考虑建议增加
+% 至少包含三类文献：供应链风险测度 / 半导体贸易与地缘政治 / SIRI类综合指数的构建方法
+
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 供应链风险评估方法（已有指数、局限性）
+    \item 半导体贸易网络研究（集中于宏观、忽略产品异质性）
+    \item 本文定位：产品级微观数据 + 多维度综合指数 + 统计边界诚实
+\end{itemize}
+
+\subsection{研究思路与创新点}
+% 【说明】强烈建议在此处放一张整体流程图，你们的数据-描述-指数-回归-结论五步逻辑非常清晰
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.95\textwidth]{research_framework.png}
+    \caption{总体研究技术路线图}
+    \label{fig:framework}
+\end{figure}
+
+\noindent\textbf{【内容提示】}
+\begin{enumerate}[nosep]
+    \item \textbf{数据层：} BACI HS07 微观产品面板（2008-2024），四类HS6产品，出口国-产品-年份三维结构
+    \item \textbf{事实层：} 多维度描述统计（规模、美国份额、主要来源国、HHI集中度），刻画结构演化事实
+    \item \textbf{指数层：} 构建SIRI半导体进口供应链风险指数，整合集中、暴露、替代不足、波动四维风险
+    \item \textbf{检验层：} 固定效应回归 + 稳健性检验，严格界定统计推断边界
+    \item \textbf{结论层：} 差异化监测建议 + 可推广框架
+\end{enumerate}
+
+\noindent\textbf{主要创新点：}
+\begin{enumerate}[nosep]
+    \item \textbf{视角创新：} 从产品异质性出发，揭示设备类和集成电路类截然不同的风险结构，打破“半导体同构”假设
+    \item \textbf{方法创新：} 构建SIRI综合风险指数，将来源集中、政策暴露、替代不足、结构波动纳入统一评分框架
+    \item \textbf{范式创新：} 严格区分“描述性结构变化”与“因果效应推定”，建立“统计事实-指数评估-检验边界”三级证据链条
+\end{enumerate}
+
+%================== 二、数据来源与变量构造 ==================
+\section{数据来源与变量构造}
+% 【说明】本部分已存在于你们的 section/data 中，直接嵌入
+
+\subsection{数据来源与产品筛选}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item CEPII BACI HS07 年度双边贸易数据
+    \item 四类HS6产品的选择依据与经济含义（表1产品代码）
+    \item 样本期选择、观测单元定义
+    \item 面板数据构造逻辑（出口国-产品-年份，正向贸易记录统计）
+\end{itemize}
+
+\subsection{变量构造与模型设定}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 被解释变量：进口额对数、进口份额
+    \item 核心解释变量：US × Post2018/Post2022/Post2023交互项
+    \item 控制变量：出口国FE、产品FE、年份FE
+    \item 标准误选择：HC1异方差稳健标准误
+\end{itemize}
+
+% 建议在此放置变量说明表，你们已有 longtable 格式的表，直接保留
+
+%================== 三、半导体相关产品的进口来源结构演化 ==================
+\section{半导体相关产品的进口来源结构演化}
+% 【说明】本部分已存在于你们的 section/descriptive 中
+% 这是你们论文的核心亮点之一——多维度的结构事实刻画
+
+\subsection{总进口规模变化}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 四类产品总进口额的时序趋势
+    \item 区分产业周期与政策冲击的不同影响
+\end{itemize}
+
+\subsection{美国进口份额的异质性变化}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 848620：27.92\% → 9.88\%
+    \item 854231：12.47\% → 9.72\%
+    \item 854232：0.95\% → 0.14\%
+    \item 854239：2.82\% → 3.94\%（方向相反，此为重要发现）
+\end{itemize}
+
+\subsection{2024年主要来源国结构}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 设备类：日本、荷兰、新加坡、美国
+    \item 集成电路类：韩国、马来西亚、越南、Other Asia, nes
+    \item 两类产品替代格局的显著差异
+\end{itemize}
+
+\subsection{进口来源集中度的演化}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item HHI指标的设计与计算
+    \item 854232的典型案例：美国份额极低但韩国独占59.82\%，来源替代 $\ne$ 来源分散
+    \item 854231的正面案例：前五大来源分布均匀，HHI最低
+\end{itemize}
+
+\subsection{结构演化的三个核心发现}
+\noindent\textbf{【内容提示】}
+\begin{enumerate}[nosep]
+    \item 美国份额在设备类和大部分集成电路中下降，但854239方向相反
+    \item 替代来源产品差异显著：设备类→日荷新，集成电路类→亚洲生产网络
+    \item 来源替代不等同于来源分散——部分产品高度集中于少数非美来源国
+\end{enumerate}
+
+%================== 四、半导体进口供应链风险指数（SIRI）构建与分析 ==================
+\section{半导体进口供应链风险指数（SIRI）构建与分析}
+% 【说明】本部分已存在于你们的 section/risk_index 中
+% 这是你们论文的第二个核心亮点——从描述统计到综合量化评估的跃升
+
+\subsection{SIRI指数设计框架}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 构建理念：单一维度（如对美依赖）评估的局限性
+    \item 四个维度：来源集中（HHI）、政策暴露（美国份额）、替代不足（非美HHI）、结构波动（变差距离）
+    \item 标准化与等权加总逻辑
+    \item $SIRI \in [0, 100]$，分值越高风险越高
+\end{itemize}
+
+\subsection{产品-年份风险分层与关键发现}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 2024年SIRI排序：854239（39.5） > 854232（35.0） > 848620（18.2） > 854231（14.2）
+    \item 854239高分不是因为对美依赖，而是来源集中和替代不足——这是一个极强的论证
+    \item 848620对美依赖最高但综合风险中等，因为来源多极
+    \item 核心结论：高政策暴露 $\ne$ 高综合风险
+\end{itemize}
+
+\subsection{权重灵敏度检验}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 政策权重从0.25提至0.40
+    \item 排序不变，rank\_change全为零
+    \item 零变化本身是有意义的信息：结构性差异远大于赋权差异
+\end{itemize}
+
+%================== 五、政策节点下的统计检验与边界讨论 ==================
+\section{政策节点下的统计检验与边界讨论}
+% 【说明】本部分已存在于你们的 section/regression 中
+% 这是你们论文的第三个核心亮点——诚实的统计方法论
+
+\subsection{固定效应回归模型设定}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 回归方程（已在原文中写出）
+    \item 两种被解释变量：绝对进口额对数、进口份额
+    \item 识别逻辑：如果出口管制有显著效应，美国来源进口应在政策节点后显著下降
+\end{itemize}
+
+\subsection{回归结果与核心解读}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 三个交互项均不显著（p值在0.55-0.98之间）
+    \item 必须审慎解读：不显著 $\ne$ 无效应，但也不支持强因果结论
+    \item 可能原因：产品与出口国维度样本有限、固定效应吸收识别变异、效应可能非线性
+\end{itemize}
+
+\subsection{描述统计与回归结果的一致性辨析}
+\noindent\textbf{【内容提示（这是你们论文最有学术品味的段落，务必展开）】}
+\begin{itemize}[nosep]
+    \item 描述统计清晰展示了美国份额下降
+    \item 回归模型提醒：美国份额下降的同时，日本、荷兰、韩国等也在承接份额
+    \item 替代效应可能使得交互项对美国单独效应的识别减弱
+    \item 结论定位：支持“来源结构重组”，不支持“美国出口额显著下降”的强因果论断
+\end{itemize}
+
+\subsection{稳健性检验}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 反双曲正弦变换替代对数
+    \item 剔除2020-2021年排除新冠扰动
+    \item 收窄对照组（前十来源国+美国）
+    \item 三组检验结果一致性
+\end{itemize}
+
+\subsection{统计边界与学术诚实性讨论}
+\noindent\textbf{【内容提示】（这一小节是额外加分项）}
+\begin{itemize}[nosep]
+    \item 诚实报告p值和边界，是统计学的核心美德
+    \item 本文的证据层级：强证据在描述统计和SIRI指数，中等证据在替代路径分析，弱证据在因果识别
+    \item 未来改进方向：更细粒度数据、准实验设计、非线性模型
+\end{itemize}
+
+%================== 六、结论与政策建议 ==================
+\section{结论与政策建议}
+% 【说明】本部分已存在于你们的 section/conclusion 中
+% 你们的结论写得非常好，三点发现+三点建议+局限性，结构完整
+
+\subsection{主要结论}
+\noindent\textbf{【内容提示】}
+\begin{enumerate}[nosep]
+    \item 2018年后进口来源结构明显重组，854239走势与其他产品不同——产品异质性成立
+    \item 设备类与集成电路类风险结构截然不同。SIRI揭示854239和854232综合风险最高，主因是集中和替代不足
+    \item 回归不支持将结构变化简单归因为出口管制，更稳妥的表述是“结构重组”
+\end{enumerate}
+
+\subsection{政策建议}
+\noindent\textbf{【内容提示】}
+\begin{enumerate}[nosep]
+    \item \textbf{差异化监测：} 设备类和集成电路类风险来源不同，不能用单一产品结论推断整体
+    \item \textbf{关注隐性集中：} 警惕854239/854232式的风险——对美依赖低但来源高度集中
+    \item \textbf{SIRI常态化：} 作为动态监测工具，结合企业级数据和更高频贸易数据，建立预警机制
+\end{enumerate}
+
+\subsection{研究局限与展望}
+\noindent\textbf{【内容提示】}
+\begin{itemize}[nosep]
+    \item 四类产品外推性有限
+    \item 固定效应回归识别能力受限
+    \item SIRI依赖样本内标准化，跨期需谨慎
+    \item 未来方向：扩展产品、优化对照组、引入外部数据
+\end{itemize}
+
+%================== 参考文献 ==================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+%================== 附录 ==================
+\appendix
+\section{复现说明}
+% 【内容】你们现有的复现说明，直接保留
+
+\section{变量说明}
+% 【内容】你们现有的变量说明表，直接保留
+
+\section{AI工具使用说明}
+% 【内容】你们现有的AI使用说明，直接保留
+
+\section{补充图表}
+% 【内容】如座席有，放剩余四个维度的SIRI分维度趋势图、稳健性检验的回归表格等
+
+\end{document}
