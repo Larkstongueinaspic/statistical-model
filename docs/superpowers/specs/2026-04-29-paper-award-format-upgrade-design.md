@@ -76,6 +76,7 @@
 - `paper/main.tex`：套用同一套格式设置，并调整参考文献、页眉页脚、标题和章节样式。
 - `paper/sections/abstract.tex`：从 LaTeX `abstract` 环境改为与母版一致的摘要块或配套命令。
 - `paper/sections/introduction.tex`：拆分和扩写绪论、研究内容与创新点。
+- `paper/sections/literature_review.tex`：新增文献综述与理论基础章节，避免把绪论写得过长。
 - `paper/sections/data.tex`：增强数据口径和变量构造说明。
 - `paper/sections/descriptive.tex`：按获奖论文层级重排描述统计与结构演化分析。
 - `paper/sections/risk_index.tex`：强化 SIRI 指标体系、分维度解释和风险分层。
@@ -165,6 +166,7 @@
 
 - 保持 A4 纵向页面。
 - 使用 `ctexart` + XeLaTeX。
+- 本轮保持 `docs/模板.tex` 为可独立编译或阅读的母版；`paper/main.tex` 镜像采用同一套关键格式设置。暂不抽取共享 `.sty` 文件，避免相对路径和提交材料迁移带来额外复杂性。
 - 页边距维持约 `left=2.8cm,right=2.8cm,top=2.6cm,bottom=2.6cm`，可在实施时微调以提高正文密度。
 - 正文页启用 `fancyhdr`：页眉中间显示短论文题名或赛事标题，页眉横线宽度约 `0.4pt`。
 - 封面页不显示页眉页脚。
@@ -240,6 +242,7 @@ SIRI
 - 低风险：854231，来源更均衡。
 
 风险分层必须与现有数据一致，不引入新结论。
+实施计划中需要安排一次对 `paper/tables/siri_ranking_2024.tex` 和相关结果表的核对，确认分层表述与 2024 年 SIRI 分数、美国份额、HHI 和替代不足指标一致。
 
 ### 8.5 v0.3 表述边界
 
@@ -290,6 +293,7 @@ SIRI
 4. 新增内容不改变已有实证结论，不夸大政策因果效应或预测模型效果。
 5. 论文主线清楚：来源结构演化 → SIRI 风险指数 → 统计检验边界 → 预测预警扩展。
 6. 工作区不混入无关结果文件改动。
+7. 最终 PDF 仍为 A4 纵向单页论文形态，不模仿获奖论文集扫描件的横向双页书稿形态。
 
 ## 11. 成功标准
 
