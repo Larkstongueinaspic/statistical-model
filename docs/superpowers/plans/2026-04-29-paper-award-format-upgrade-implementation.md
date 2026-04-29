@@ -30,44 +30,44 @@
 ## File Structure
 
 **Create:**
-- `paper/sections/literature_review.tex`  
+- `paper/sections/literature_review.tex`
   Focused literature review and theoretical positioning. Single responsibility: explain prior research categories and locate this paper's contribution.
 
 **Modify:**
-- `docs/模板.tex`  
+- `docs/模板.tex`
   Mother template with award-paper-like formatting, Chinese section numbering, compact spacing, page style, figure/table captions, and numeric references.
 
-- `paper/main.tex`  
+- `paper/main.tex`
   Mirror the mother-template format settings, wire `literature_review`, switch to numeric bibliography, and keep the existing section file architecture.
 
-- `paper/sections/abstract.tex`  
+- `paper/sections/abstract.tex`
   Convert from default `abstract` environment to a compact reusable abstract block compatible with the new template.
 
-- `paper/sections/introduction.tex`  
+- `paper/sections/introduction.tex`
   Expand into competition-style introduction: background, significance, research content/technical route, innovations.
 
-- `paper/sections/data.tex`  
+- `paper/sections/data.tex`
   Add subsections and make data/sample/variable construction more explicit.
 
-- `paper/sections/descriptive.tex`  
+- `paper/sections/descriptive.tex`
   Add Chinese-level subsections and tighten the source-structure story.
 
-- `paper/sections/risk_index.tex`  
+- `paper/sections/risk_index.tex`
   Add SIRI indicator-system display and risk layering language grounded in existing results.
 
-- `paper/sections/regression.tex`  
+- `paper/sections/regression.tex`
   Add subsections and sharpen statistical-boundary explanation.
 
-- `paper/sections/prediction_extension.tex`  
+- `paper/sections/prediction_extension.tex`
   Align with the new Chinese hierarchy and keep BACI-only caveats.
 
-- `paper/sections/conclusion.tex`  
+- `paper/sections/conclusion.tex`
   Split conclusions, policy suggestions, and limitations into competition-style paragraphs/subsections.
 
-- `paper/sections/appendix.tex`  
+- `paper/sections/appendix.tex`
   Keep reproduction, variable notes, and AI-use notes aligned with the new hierarchy.
 
-- `paper/references.bib`  
+- `paper/references.bib`
   Add directly relevant references only; keep bibliography compact and numeric.
 
 **Do not touch unless verification shows a concrete need:**

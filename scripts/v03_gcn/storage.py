@@ -30,4 +30,3 @@ def save_table(df: pd.DataFrame, filename: str, config: GcnConfig) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(path, index=False)
     return path
-

@@ -55,4 +55,3 @@ class GcnConfig:
 
 def get_config() -> GcnConfig:
     return GcnConfig()
-

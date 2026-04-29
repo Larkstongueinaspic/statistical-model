@@ -33,4 +33,3 @@ def build_simple_gcn_model(input_dim: int, hidden_dim: int):
             return self.head(pooled).squeeze(-1)
 
     return SimpleGraphRegressor()
-

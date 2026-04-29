@@ -21,4 +21,3 @@ def write_summary(metrics: pd.DataFrame, validation: pd.DataFrame, config: GcnCo
     ]
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
-

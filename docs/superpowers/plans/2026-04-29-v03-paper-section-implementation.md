@@ -30,33 +30,33 @@
 ## File Structure
 
 **Create:**
-- `paper/sections/prediction_extension.tex`  
+- `paper/sections/prediction_extension.tex`
   New正文 section explaining the v0.3 BACI-only trade-network prediction extension.
 
-- `paper/tables/v03_prediction_overview.tex`  
+- `paper/tables/v03_prediction_overview.tex`
   Compact overview of product count, usable graph count, split sample count, and GDELT status.
 
-- `paper/tables/v03_prediction_metrics.tex`  
+- `paper/tables/v03_prediction_metrics.tex`
   Compact test-set metrics comparing `naive`, `ridge`, and `gcn_numpy` for all 20 model products and core 4 products.
 
 **Modify:**
-- `paper/main.tex`  
+- `paper/main.tex`
   Add `\input{sections/prediction_extension}` after regression and before conclusion.
 
-- `paper/sections/abstract.tex`  
+- `paper/sections/abstract.tex`
   Add one sentence about the v0.3 trade-network prediction extension.
 
-- `paper/sections/introduction.tex`  
+- `paper/sections/introduction.tex`
   Update contribution paragraph to mention the prediction/prewarning extension.
 
-- `paper/sections/conclusion.tex`  
+- `paper/sections/conclusion.tex`
   Add a guarded conclusion sentence about v0.3 and its BACI-only/GDELT limitation.
 
-- `paper/sections/appendix.tex`  
+- `paper/sections/appendix.tex`
   Add v0.3 reproduction command and clarify that GDELT is not enabled in current paper results.
 
 **Optional Modify:**
-- `paper/figures/gcn_actual_vs_predicted_siri.png`  
+- `paper/figures/gcn_actual_vs_predicted_siri.png`
   Copy from `results/v03_gcn/figures/` only if the new section includes the scatter plot.
 
 ---

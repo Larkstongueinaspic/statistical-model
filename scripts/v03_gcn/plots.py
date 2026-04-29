@@ -25,4 +25,3 @@ def plot_actual_vs_predicted(predictions: pd.DataFrame, config: GcnConfig) -> Pa
     fig.savefig(path, dpi=160)
     plt.close(fig)
     return path
-
