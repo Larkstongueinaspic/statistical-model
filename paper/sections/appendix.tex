@@ -1,11 +1,16 @@
 \section{复现说明}
 
+\subsection{运行命令}
+
 主要复现命令如下：
 \begin{verbatim}
 .venv/bin/python scripts/run_v02_analysis.py
 .venv/bin/python scripts/run_v03_gcn_analysis.py --baci-only
 \end{verbatim}
 当前仓库已保存 v0.2 的缓存结果。若需从原始数据完整复现，需要将 BACI HS07 V202601 原始数据目录放置于项目根目录下的 \texttt{BACI\_HS07\_V202601/}。
+
+\subsection{GDELT 数据接口预留}
+
 本文 v0.3 扩展结果使用 BACI-only 模式生成；若需启用 GDELT 新闻事件压力变量，可使用如下命令：
 \begin{verbatim}
 .venv/bin/python scripts/run_v03_gcn_analysis.py \
@@ -20,7 +25,7 @@
 
 \section{变量说明}
 
-\begin{longtable}{ll}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.53\textwidth}@{}}
 \toprule
 变量 & 含义 \\
 \midrule
