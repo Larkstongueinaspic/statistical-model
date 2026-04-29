@@ -2,3 +2,5 @@ pandas==3.0.2
 numpy==2.4.4
 matplotlib==3.10.8
 statsmodels==0.14.6
+scikit-learn
+torch

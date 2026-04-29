@@ -1,0 +1,18 @@
+\begin{table}[H]
+  \centering
+  \caption{v0.3 测试集预测指标比较}
+  \label{tab:v03-metrics}
+  \begin{tabular}{llrrrr}
+    \toprule
+    模型 & 样本范围 & MAE & RMSE & Spearman & 样本数 \\
+    \midrule
+    Naive & 全部20个产品 & 3.978 & 7.899 & 0.812 & 40 \\
+    Naive & 核心4产品 & 1.667 & 2.117 & 0.881 & 8 \\
+    Ridge & 全部20个产品 & 4.331 & 7.577 & 0.777 & 40 \\
+    Ridge & 核心4产品 & 2.070 & 2.463 & 0.881 & 8 \\
+    贸易网络原型 & 全部20个产品 & 61.179 & 263.756 & 0.601 & 40 \\
+    贸易网络原型 & 核心4产品 & 1.974 & 2.444 & 0.857 & 8 \\
+    \bottomrule
+  \end{tabular}
+  \caption*{注：当前 v0.3 结果为 BACI-only 贸易网络预测扩展，未接入真实 GDELT 新闻事件数据；“贸易网络原型”对应程序输出中的 gcn\_numpy 行，不代表完整 GDELT-GCN 模型。}
+\end{table}

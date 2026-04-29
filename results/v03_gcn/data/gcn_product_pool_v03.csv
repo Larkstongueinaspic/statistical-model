@@ -1,0 +1,21 @@
+product_code,product_description,product_group,is_core_product,metadata_exists,positive_years,exporter_count,labeled_transitions,total_import_value_kusd,model_status,status_reason
+848610,Machines and apparatus of a kind used solely or principally for the manufacture of semiconductor boules or wafers,semiconductor_equipment,False,True,17,47,16,19458031.029,model,passes_model_thresholds
+848620,Machines and apparatus of a kind used solely or principally for the manufacture of semiconductor devices or of electronic integrated circuits,semiconductor_equipment,True,True,17,60,16,175604549.714,model,passes_model_thresholds
+848640,"Machines and apparatus of a kind used solely or principally for the manufacture or repair of masks and reticles, assembling semiconductor devices or electronic integrated circuits, or for lifting, handling, loading or unloading items of heading 8486",semiconductor_equipment,False,True,17,55,16,43875021.223000005,model,passes_model_thresholds
+848690,Machines and apparatus of heading 8486: parts and accessories,semiconductor_equipment,False,True,17,111,16,40457702.423999995,model,passes_model_thresholds
+854110,"Electrical apparatus: diodes, other than photosensitive or light emitting diodes",semiconductor_devices,False,True,17,185,16,23426266.062,model,passes_model_thresholds
+854121,"Electrical apparatus: transistors, (other than photosensitive), with a dissipation rate of less than 1W",semiconductor_devices,False,True,17,162,16,21642213.197,model,passes_model_thresholds
+854129,"Electrical apparatus: transistors, (other than photosensitive), with a dissipation rate of 1W or more",semiconductor_devices,False,True,17,161,16,46123621.90099999,model,passes_model_thresholds
+854130,"Electrical apparatus: thyristors, diacs and triacs, other than photosensitive devices",semiconductor_devices,False,True,17,83,16,2876538.3209999995,model,passes_model_thresholds
+854140,"Electrical apparatus: photosensitive, including photovoltaic cells, whether or not assembled in modules or made up into panels, light emitting diodes",semiconductor_devices,False,True,17,163,16,102313883.59300001,model,passes_model_thresholds
+854150,"Electrical apparatus: photosensitive semiconductor devices n.e.c. in heading no. 8541, including photovoltaic cells, whether or not assembled in modules or made up into panels",semiconductor_devices,False,True,16,90,15,4493351.522,model,passes_model_thresholds
+854160,Crystals: mounted piezo-electric,semiconductor_devices,False,True,17,140,16,27706602.678,model,passes_model_thresholds
+854190,"Electrical apparatus: parts for diodes, transistors and similar semiconductor devices and photosensitive semiconductor devices",semiconductor_devices,False,True,17,82,16,26070842.714,model,passes_model_thresholds
+854231,"Electronic integrated circuits: processors and controllers, whether or not combined with memories, converters, logic circuits, amplifiers, clock and timing circuits, or other circuits",integrated_circuits,True,True,17,198,16,1081651757.912,model,passes_model_thresholds
+854232,Electronic integrated circuits: memories,integrated_circuits,True,True,17,161,16,715975217.43,model,passes_model_thresholds
+854233,Electronic integrated circuits: amplifiers,integrated_circuits,False,True,17,157,16,57635703.29799999,model,passes_model_thresholds
+854239,Electronic integrated circuits: n.e.c. in heading no. 8542,integrated_circuits,True,True,17,205,16,641177786.3440001,model,passes_model_thresholds
+854290,Parts of electronic integrated circuits,integrated_circuits,False,True,17,101,16,15517252.854,model,passes_model_thresholds
+853400,Circuits: printed,related_hardware,False,True,17,150,16,116899271.549,model,passes_model_thresholds
+903082,Instruments and apparatus: for measuring or checking semiconductor wafers or devices,related_hardware,False,True,17,61,16,11605399.008000001,model,passes_model_thresholds
+903141,"Optical instruments and appliances: for inspecting semiconductor wafers or devices or for inspecting photomasks or reticles used in manufacturing semiconductor devices, n.e.c. in chapter 90",related_hardware,False,True,17,49,16,19732068.631,model,passes_model_thresholds

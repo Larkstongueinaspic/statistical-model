@@ -174,6 +174,28 @@ v0.2 仍然保持小而稳，主要做：
 - 复杂因果识别设计
 - 大量外部控制变量
 
+本分支例外：`gcn-gdelt-clean` 只作为 v0.3 探索性扩展，新增 `scripts/v03_gcn/` 和
+`scripts/run_v03_gcn_analysis.py`。v0.3 可以跑 BACI-only 图模型，也可以在提供真实
+GDELT 事件 CSV 后生成 GDELT 压力变量；这不改变 v0.2 作为论文主线的定位。
+
+v0.3 常用命令：
+
+```bash
+python scripts/run_v03_gcn_analysis.py --baci-only
+python scripts/run_v03_gcn_analysis.py --gdelt-events data/gdelt/prefiltered_events.csv
+```
+
+GDELT CSV 至少需要这些列：
+
+- `SQLDATE`
+- `Actor1CountryCode`
+- `Actor2CountryCode`
+- `GoldsteinScale`
+- `NumMentions`
+- `AvgTone`
+
+如果开启内置关键词过滤，还需要 `SOURCEURL`、`DocumentIdentifier` 或 `EventText` 之一。
+
 ## 8. 上手顺序
 
 如果刚接手，建议按这个顺序看：

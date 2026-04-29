@@ -7,10 +7,16 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{natbib}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{titling}
 
 \geometry{left=2.8cm,right=2.8cm,top=2.6cm,bottom=2.6cm}
 \hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black}
@@ -22,8 +28,48 @@
 \newcommand{\members}{最终提交前由参赛队填写}
 \newcommand{\advisor}{最终提交前由参赛队填写}
 
-\title{\papertitle}
-\author{\school\\\teamname\\成员：\members\\指导教师：\advisor}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\linespread{1.18}
+\setlist{nosep,leftmargin=2em}
+\captionsetup{font=small,labelfont=bf,labelsep=space}
+\captionsetup[table]{position=top}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\headheight}{14pt}
+
+\renewcommand\thesection{\chinese{section}}
+\renewcommand\thesubsection{（\chinese{subsection}）}
+\renewcommand\thesubsubsection{\arabic{subsubsection}.}
+
+\titleformat{\section}{\centering\bfseries\large}{\thesection、}{0pt}{}
+\titleformat{\subsection}{\bfseries\normalsize}{\thesubsection}{0pt}{}
+\titleformat{\subsubsection}{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2ex plus .2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{0.8ex plus .2ex}{0.4ex}
+\titlespacing*{\subsubsection}{0pt}{0.6ex plus .2ex}{0.3ex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small \papertitle}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newcommand{\paperabstract}[2]{%
+  \begin{center}
+  {\bfseries\large 摘\quad 要}
+  \end{center}
+  \vspace{0.5ex}
+  #1
+  \vspace{0.8ex}
+
+  \noindent\textbf{关键词：}#2
+}
+
+\title{\textbf{\papertitle}\\[1ex]
+\large ——基于BACI微观测算、SIRI风险指数与统计证据边界的实证分析}
+\author{\school\\\teamname\\[1ex] 成员：\members\\[1ex] 指导教师：\advisor}
 \date{2026年}
 
 \begin{document}
@@ -37,13 +83,15 @@
 \clearpage
 
 \input{sections/introduction}
+\input{sections/literature_review}
 \input{sections/data}
 \input{sections/descriptive}
 \input{sections/risk_index}
 \input{sections/regression}
+\input{sections/prediction_extension}
 \input{sections/conclusion}
 
-\bibliographystyle{plainnat}
+\bibliographystyle{unsrtnat}
 \bibliography{references}
 
 \appendix
