@@ -1,49 +1,36 @@
 exporter_code,exporter_iso3,exporter_name,gdelt_country_code,mapping_status
-32,ARG,Argentina,ARG,mapped
 36,AUS,Australia,AUS,mapped
 40,AUT,Austria,AUT,mapped
 56,BEL,Belgium,BEL,mapped
-100,BGR,Bulgaria,BGR,mapped
-104,MMR,Myanmar,MMR,mapped
+96,BRN,Brunei Darussalam,BRN,mapped
 112,BLR,Belarus,BLR,mapped
 116,KHM,Cambodia,KHM,mapped
 124,CAN,Canada,CAN,mapped
-180,COD,Dem. Rep. of the Congo,COD,mapped
 188,CRI,Costa Rica,CRI,mapped
-191,HRV,Croatia,HRV,mapped
-196,CYP,Cyprus,CYP,mapped
 203,CZE,Czechia,CZE,mapped
 208,DNK,Denmark,DNK,mapped
-233,EST,Estonia,EST,mapped
 246,FIN,Finland,FIN,mapped
 251,FRA,France,FRA,mapped
 276,DEU,Germany,DEU,mapped
-300,GRC,Greece,GRC,mapped
+340,HND,Honduras,HND,mapped
 344,HKG,"China, Hong Kong SAR",HKG,mapped
 348,HUN,Hungary,HUN,mapped
 360,IDN,Indonesia,IDN,mapped
-364,IRN,Iran,IRN,mapped
 372,IRL,Ireland,IRL,mapped
 376,ISR,Israel,ISR,mapped
 380,ITA,Italy,ITA,mapped
 392,JPN,Japan,JPN,mapped
 410,KOR,Rep. of Korea,KOR,mapped
-417,KGZ,Kyrgyzstan,KGZ,mapped
-440,LTU,Lithuania,LTU,mapped
-442,LUX,Luxembourg,LUX,mapped
-446,MAC,"China, Macao SAR",MAC,mapped
 458,MYS,Malaysia,MYS,mapped
-470,MLT,Malta,MLT,mapped
 484,MEX,Mexico,MEX,mapped
 490,S19,"Other Asia, nes",S19,mapped
+498,MDA,Rep. of Moldova,MDA,mapped
 528,NLD,Netherlands,NLD,mapped
-554,NZL,New Zealand,NZL,mapped
 579,NOR,Norway,NOR,mapped
 608,PHL,Philippines,PHL,mapped
 616,POL,Poland,POL,mapped
 620,PRT,Portugal,PRT,mapped
 643,RUS,Russian Federation,RUS,mapped
-688,SRB,Serbia,SRB,mapped
 699,IND,India,IND,mapped
 702,SGP,Singapore,SGP,mapped
 703,SVK,Slovakia,SVK,mapped
@@ -59,152 +46,168 @@ exporter_code,exporter_iso3,exporter_name,gdelt_country_code,mapping_status
 804,UKR,Ukraine,UKR,mapped
 826,GBR,United Kingdom,GBR,mapped
 842,USA,USA,USA,mapped
+32,ARG,Argentina,ARG,mapped
+100,BGR,Bulgaria,BGR,mapped
+104,MMR,Myanmar,MMR,mapped
+180,COD,Dem. Rep. of the Congo,COD,mapped
+191,HRV,Croatia,HRV,mapped
+196,CYP,Cyprus,CYP,mapped
+233,EST,Estonia,EST,mapped
+300,GRC,Greece,GRC,mapped
+364,IRN,Iran,IRN,mapped
+417,KGZ,Kyrgyzstan,KGZ,mapped
+440,LTU,Lithuania,LTU,mapped
+442,LUX,Luxembourg,LUX,mapped
+446,MAC,"China, Macao SAR",MAC,mapped
+470,MLT,Malta,MLT,mapped
+554,NZL,New Zealand,NZL,mapped
+688,SRB,Serbia,SRB,mapped
+76,BRA,Brazil,BRA,mapped
+144,LKA,Sri Lanka,LKA,mapped
+398,KAZ,Kazakhstan,KAZ,mapped
+504,MAR,Morocco,MAR,mapped
+642,ROU,Romania,ROU,mapped
+748,SWZ,Eswatini,SWZ,mapped
 4,AFG,Afghanistan,AFG,mapped
 8,ALB,Albania,ALB,mapped
 12,DZA,Algeria,DZA,mapped
 20,AND,Andorra,AND,mapped
-24,AGO,Angola,AGO,mapped
-28,ATG,Antigua and Barbuda,ATG,mapped
-31,AZE,Azerbaijan,AZE,mapped
-44,BHS,Bahamas,BHS,mapped
 48,BHR,Bahrain,BHR,mapped
 50,BGD,Bangladesh,BGD,mapped
 51,ARM,Armenia,ARM,mapped
 52,BRB,Barbados,BRB,mapped
-60,BMU,Bermuda,BMU,mapped
-64,BTN,Bhutan,BTN,mapped
-68,BOL,Bolivia (Plurinational State of),BOL,mapped
 70,BIH,Bosnia Herzegovina,BIH,mapped
-72,BWA,Botswana,BWA,mapped
-76,BRA,Brazil,BRA,mapped
-84,BLZ,Belize,BLZ,mapped
-90,SLB,Solomon Isds,SLB,mapped
-92,VGB,Br. Virgin Isds,VGB,mapped
-96,BRN,Brunei Darussalam,BRN,mapped
-108,BDI,Burundi,BDI,mapped
-120,CMR,Cameroon,CMR,mapped
-132,CPV,Cabo Verde,CPV,mapped
-136,CYM,Cayman Isds,CYM,mapped
-140,CAF,Central African Rep.,CAF,mapped
-144,LKA,Sri Lanka,LKA,mapped
-148,TCD,Chad,TCD,mapped
 152,CHL,Chile,CHL,mapped
-170,COL,Colombia,COL,mapped
-174,COM,Comoros,COM,mapped
-175,MYT,Mayotte (Overseas France),MYT,mapped
-178,COG,Congo,COG,mapped
 184,COK,Cook Isds,COK,mapped
 192,CUB,Cuba,CUB,mapped
 212,DMA,Dominica,DMA,mapped
 214,DOM,Dominican Rep.,DOM,mapped
 218,ECU,Ecuador,ECU,mapped
 222,SLV,El Salvador,SLV,mapped
-226,GNQ,Equatorial Guinea,GNQ,mapped
 231,ETH,Ethiopia,ETH,mapped
 242,FJI,Fiji,FJI,mapped
-258,PYF,French Polynesia,PYF,mapped
-266,GAB,Gabon,GAB,mapped
 268,GEO,Georgia,GEO,mapped
-270,GMB,Gambia,GMB,mapped
-275,PSE,State of Palestine,PSE,mapped
 288,GHA,Ghana,GHA,mapped
-296,KIR,Kiribati,KIR,mapped
-304,GRL,Greenland,GRL,mapped
-308,GRD,Grenada,GRD,mapped
-320,GTM,Guatemala,GTM,mapped
-324,GIN,Guinea,GIN,mapped
-328,GUY,Guyana,GUY,mapped
-332,HTI,Haiti,HTI,mapped
-340,HND,Honduras,HND,mapped
 352,ISL,Iceland,ISL,mapped
 368,IRQ,Iraq,IRQ,mapped
-384,CIV,CÃ´te d'Ivoire,CIV,mapped
 388,JAM,Jamaica,JAM,mapped
-398,KAZ,Kazakhstan,KAZ,mapped
 400,JOR,Jordan,JOR,mapped
 404,KEN,Kenya,KEN,mapped
 408,PRK,Dem. People's Rep. of Korea,PRK,mapped
 414,KWT,Kuwait,KWT,mapped
-418,LAO,Lao People's Dem. Rep.,LAO,mapped
 422,LBN,Lebanon,LBN,mapped
-426,LSO,Lesotho,LSO,mapped
-428,LVA,Latvia,LVA,mapped
-430,LBR,Liberia,LBR,mapped
-434,LBY,Libya,LBY,mapped
-450,MDG,Madagascar,MDG,mapped
-454,MWI,Malawi,MWI,mapped
 462,MDV,Maldives,MDV,mapped
 466,MLI,Mali,MLI,mapped
-478,MRT,Mauritania,MRT,mapped
-480,MUS,Mauritius,MUS,mapped
-496,MNG,Mongolia,MNG,mapped
-498,MDA,Rep. of Moldova,MDA,mapped
 499,MNE,Montenegro,MNE,mapped
-500,MSR,Montserrat,MSR,mapped
-504,MAR,Morocco,MAR,mapped
-508,MOZ,Mozambique,MOZ,mapped
-512,OMN,Oman,OMN,mapped
-516,NAM,Namibia,NAM,mapped
 520,NRU,Nauru,NRU,mapped
-530,ANT,Netherlands Antilles (...2010),ANT,mapped
-531,CUW,CuraÃ§ao,CUW,mapped
 533,ABW,Aruba,ABW,mapped
-540,NCL,New Caledonia,NCL,mapped
-548,VUT,Vanuatu,VUT,mapped
-558,NIC,Nicaragua,NIC,mapped
 562,NER,Niger,NER,mapped
-566,NGA,Nigeria,NGA,mapped
-583,FSM,FS Micronesia,FSM,mapped
 584,MHL,Marshall Isds,MHL,mapped
-585,PLW,Palau,PLW,mapped
 586,PAK,Pakistan,PAK,mapped
 591,PAN,Panama,PAN,mapped
 598,PNG,Papua New Guinea,PNG,mapped
+626,TLS,Timor-Leste,TLS,mapped
+682,SAU,Saudi Arabia,SAU,mapped
+788,TUN,Tunisia,TUN,mapped
+807,MKD,North Macedonia,MKD,mapped
+818,EGY,Egypt,EGY,mapped
+854,BFA,Burkina Faso,BFA,mapped
+858,URY,Uruguay,URY,mapped
+24,AGO,Angola,AGO,mapped
+31,AZE,Azerbaijan,AZE,mapped
+68,BOL,Bolivia (Plurinational State of),BOL,mapped
+72,BWA,Botswana,BWA,mapped
+84,BLZ,Belize,BLZ,mapped
+92,VGB,Br. Virgin Isds,VGB,mapped
+120,CMR,Cameroon,CMR,mapped
+140,CAF,Central African Rep.,CAF,mapped
+170,COL,Colombia,COL,mapped
+320,GTM,Guatemala,GTM,mapped
+328,GUY,Guyana,GUY,mapped
+332,HTI,Haiti,HTI,mapped
+384,CIV,CÃ´te d'Ivoire,CIV,mapped
+418,LAO,Lao People's Dem. Rep.,LAO,mapped
+428,LVA,Latvia,LVA,mapped
+430,LBR,Liberia,LBR,mapped
+450,MDG,Madagascar,MDG,mapped
+480,MUS,Mauritius,MUS,mapped
+496,MNG,Mongolia,MNG,mapped
+500,MSR,Montserrat,MSR,mapped
+508,MOZ,Mozambique,MOZ,mapped
+512,OMN,Oman,OMN,mapped
+516,NAM,Namibia,NAM,mapped
+524,NPL,Nepal,NPL,mapped
+540,NCL,New Caledonia,NCL,mapped
 600,PRY,Paraguay,PRY,mapped
 604,PER,Peru,PER,mapped
-624,GNB,Guinea-Bissau,GNB,mapped
-626,TLS,Timor-Leste,TLS,mapped
 634,QAT,Qatar,QAT,mapped
-642,ROU,Romania,ROU,mapped
 646,RWA,Rwanda,RWA,mapped
-662,LCA,Saint Lucia,LCA,mapped
-666,SPM,Saint Pierre and Miquelon,SPM,mapped
-670,VCT,Saint Vincent and the Grenadines,VCT,mapped
+659,KNA,Saint Kitts and Nevis,KNA,mapped
 674,SMR,San Marino,SMR,mapped
-678,STP,Sao Tome and Principe,STP,mapped
-682,SAU,Saudi Arabia,SAU,mapped
 686,SEN,Senegal,SEN,mapped
-706,SOM,Somalia,SOM,mapped
+690,SYC,Seychelles,SYC,mapped
+694,SLE,Sierra Leone,SLE,mapped
 716,ZWE,Zimbabwe,ZWE,mapped
 729,SDN,Sudan,SDN,mapped
-748,SWZ,Eswatini,SWZ,mapped
+740,SUR,Suriname,SUR,mapped
 760,SYR,Syria,SYR,mapped
 762,TJK,Tajikistan,TJK,mapped
 768,TGO,Togo,TGO,mapped
-780,TTO,Trinidad and Tobago,TTO,mapped
-788,TUN,Tunisia,TUN,mapped
 795,TKM,Turkmenistan,TKM,mapped
-796,TCA,Turks and Caicos Isds,TCA,mapped
-798,TUV,Tuvalu,TUV,mapped
 800,UGA,Uganda,UGA,mapped
-807,MKD,North Macedonia,MKD,mapped
-818,EGY,Egypt,EGY,mapped
-834,TZA,United Rep. of Tanzania,TZA,mapped
-858,URY,Uruguay,URY,mapped
-860,UZB,Uzbekistan,UZB,mapped
-862,VEN,Venezuela,VEN,mapped
-876,WLF,Wallis and Futuna Isds,WLF,mapped
 882,WSM,Samoa,WSM,mapped
 887,YEM,Yemen,YEM,mapped
 894,ZMB,Zambia,ZMB,mapped
-524,NPL,Nepal,NPL,mapped
+64,BTN,Bhutan,BTN,mapped
+108,BDI,Burundi,BDI,mapped
+132,CPV,Cabo Verde,CPV,mapped
+136,CYM,Cayman Isds,CYM,mapped
+148,TCD,Chad,TCD,mapped
+178,COG,Congo,COG,mapped
+226,GNQ,Equatorial Guinea,GNQ,mapped
+258,PYF,French Polynesia,PYF,mapped
+266,GAB,Gabon,GAB,mapped
+270,GMB,Gambia,GMB,mapped
+275,PSE,State of Palestine,PSE,mapped
+296,KIR,Kiribati,KIR,mapped
+308,GRD,Grenada,GRD,mapped
+324,GIN,Guinea,GIN,mapped
+434,LBY,Libya,LBY,mapped
+454,MWI,Malawi,MWI,mapped
+478,MRT,Mauritania,MRT,mapped
+531,CUW,CuraÃ§ao,CUW,mapped
+548,VUT,Vanuatu,VUT,mapped
+558,NIC,Nicaragua,NIC,mapped
+566,NGA,Nigeria,NGA,mapped
 574,NFK,Norfolk Isds,NFK,mapped
-690,SYC,Seychelles,SYC,mapped
-694,SLE,Sierra Leone,SLE,mapped
+583,FSM,FS Micronesia,FSM,mapped
+624,GNB,Guinea-Bissau,GNB,mapped
+662,LCA,Saint Lucia,LCA,mapped
+670,VCT,Saint Vincent and the Grenadines,VCT,mapped
+678,STP,Sao Tome and Principe,STP,mapped
+706,SOM,Somalia,SOM,mapped
+776,TON,Tonga,TON,mapped
+780,TTO,Trinidad and Tobago,TTO,mapped
+796,TCA,Turks and Caicos Isds,TCA,mapped
+798,TUV,Tuvalu,TUV,mapped
+834,TZA,United Rep. of Tanzania,TZA,mapped
+860,UZB,Uzbekistan,UZB,mapped
+862,VEN,Venezuela,VEN,mapped
+175,MYT,Mayotte (Overseas France),MYT,mapped
+204,BEN,Benin,BEN,mapped
+426,LSO,Lesotho,LSO,mapped
+585,PLW,Palau,PLW,mapped
 232,ERI,Eritrea,ERI,mapped
+666,SPM,Saint Pierre and Miquelon,SPM,mapped
+876,WLF,Wallis and Futuna Isds,WLF,mapped
+44,BHS,Bahamas,BHS,mapped
+28,ATG,Antigua and Barbuda,ATG,mapped
+60,BMU,Bermuda,BMU,mapped
+90,SLB,Solomon Isds,SLB,mapped
+174,COM,Comoros,COM,mapped
+304,GRL,Greenland,GRL,mapped
+530,ANT,Netherlands Antilles (...2010),ANT,mapped
 262,DJI,Djibouti,DJI,mapped
 292,GIB,Gibraltar,GIB,mapped
 728,SSD,South Sudan,SSD,mapped
 736,SDN,Sudan (...2011),SDN,mapped
-740,SUR,Suriname,SUR,mapped
-854,BFA,Burkina Faso,BFA,mapped
