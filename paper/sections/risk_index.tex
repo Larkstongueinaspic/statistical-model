@@ -6,19 +6,7 @@
 
 \begin{figure}[H]
   \centering
-  \small
-  \setlength{\fboxsep}{6pt}
-  \fbox{\begin{minipage}{0.90\textwidth}
-  \begin{center}
-  \textbf{SIRI 半导体进口供应链风险指数}
-  \end{center}
-  \begin{tabular}{@{}ll@{}}
-  来源集中风险 & 全来源 HHI \\
-  政策暴露风险 & 美国来源进口份额 \\
-  替代不足风险 & 非美国来源内部 HHI \\
-  结构波动风险 & 相邻年份来源份额总变差距离 \\
-  \end{tabular}
-  \end{minipage}}
+  \includegraphics[width=0.96\textwidth]{siri_framework_hierarchy.png}
   \caption{SIRI 指标体系}
   \label{fig:siri-framework}
 \end{figure}
@@ -49,6 +37,15 @@ SIRI_{p,t}=100\times(0.25C_{p,t}^{*}+0.25P_{p,t}^{*}+0.25A_{p,t}^{*}+0.25V_{p,t}
 \end{figure}
 
 表 \ref{tab:siri-ranking} 显示 2024 年 SIRI 排序。854239（其他电子集成电路）以 39.5 分位居第一，854232（存储器）以 35.0 分紧随其后，848620（半导体制造设备）和 854231（处理器及控制器）分别为 18.2 分和 14.2 分。该排序反映了不同产品风险来源的结构性差异。
+
+图 \ref{fig:siri-radar-2024} 展示 2024 年四类产品在四个标准化风险维度上的差异。可以看到，848620 的政策暴露相对突出，但来源集中和替代不足并不高；854239 和 854232 的风险主要来自来源集中和替代不足。这一结果直接支持“高对美依赖不等于高综合风险”的判断。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\textwidth]{siri_2024_radar.png}
+    \caption{2024 年四类产品 SIRI 四维度雷达图}
+    \label{fig:siri-radar-2024}
+\end{figure}
 
 按照 2024 年 SIRI 排序，854239 和 854232 属于相对高风险产品，主要风险来自来源集中和替代不足；848620 属于中等风险产品，虽然政策暴露较高，但日本、荷兰、新加坡和美国之间形成较多极的来源结构；854231 风险最低，主要得益于来源分布更均衡。
 

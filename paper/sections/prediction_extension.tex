@@ -8,19 +8,7 @@
 
 \begin{figure}[H]
     \centering
-    \setlength{\fboxsep}{8pt}
-    \fbox{%
-    \begin{minipage}{0.92\textwidth}
-    \centering
-    \small
-    \begin{tabular}{@{}>{\centering\arraybackslash}p{0.20\linewidth} c >{\centering\arraybackslash}p{0.22\linewidth} c >{\centering\arraybackslash}p{0.22\linewidth}@{}}
-    \textbf{BACI 贸易数据} & $\rightarrow$ & \textbf{20 个 HS6 产品池} & $\rightarrow$ & \textbf{年度进口来源网络} \\
-    &&&&\\[-0.4em]
-    \textbf{SIRI 年度标签} & $\leftarrow$ & \textbf{产品--年份图样本} & $\rightarrow$ & \textbf{下一年风险预测} \\
-    &&&&\\[-0.4em]
-    \multicolumn{5}{c}{\textbf{Naive / Ridge / 贸易网络原型} $\rightarrow$ \textbf{预测误差与排序相关性评估}}
-    \end{tabular}
-    \end{minipage}}
+    \includegraphics[width=0.98\textwidth]{v03_prediction_workflow.png}
     \caption{v0.3 贸易网络预测扩展流程}
     \label{fig:v03-workflow}
 \end{figure}
@@ -36,6 +24,15 @@
 预测设计采用一年期前瞻设定，即使用年份 $t$ 的贸易网络和风险特征预测 $t+1$ 年的产品级 SIRI。为避免把预测结果解释为政策冲击的因果识别，本文仅将其作为供应链风险预警的探索性任务，并在时间维度上划分训练、验证和测试样本。模型比较包括三类：Naive 基线使用上一年 SIRI 直接预测下一年 SIRI；Ridge 模型使用表格化风险特征进行线性正则化预测；贸易网络原型模型则利用图结构传播后的网络特征进行预测，用于检验年度进口来源图是否能提供额外的结构信息。这里的贸易网络原型对应轻量级 gcn\_numpy 原型，不等同于完整 GDELT-GCN 模型。测试集模型比较结果见表 \ref{tab:v03-metrics}。
 
 \input{tables/v03_prediction_metrics}
+
+图 \ref{fig:v03-metrics-bar} 将测试集 MAE 和 RMSE 结果转化为分组柱状图。全部 20 个产品范围内，Naive 和 Ridge 的误差明显低于贸易网络原型；在核心 4 产品范围内，三类模型误差更接近，但复杂原型仍没有形成稳定优势。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{prediction_metrics_bar.png}
+    \caption{预测模型 MAE/RMSE 对比柱状图}
+    \label{fig:v03-metrics-bar}
+\end{figure}
 
 \subsection{结果解读与预警价值}
 

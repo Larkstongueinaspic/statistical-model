@@ -6,6 +6,15 @@
 
 从政策时间线看，美国对华半导体出口管制经历多轮升级。2018 年，美国商务部以国家安全为由将多家中国科技企业列入实体清单，限制其获取美国原产半导体产品和技术。2022 年 10 月，美国出台全面出口管制新规，对先进计算芯片、半导体制造设备和相关技术实施广泛的出口许可要求。同年通过的《芯片与科学法案》进一步以产业补贴和出口限制组合推动半导体供应链重构。2023 年至今，管制细则持续更新，涉及实体清单扩容和许可证审查收紧。这些政策节点构成了本文实证分析的基本时间框架。
 
+图 \ref{fig:policy-timeline} 将样本期内与半导体出口管制相关的关键政策节点可视化。需要强调的是，该图用于界定研究背景和回归分段时间点，并不直接构成因果识别设计。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\textwidth]{policy_timeline.png}
+  \caption{美国对华半导体出口管制政策时间线}
+  \label{fig:policy-timeline}
+\end{figure}
+
 已有讨论常将半导体供应链风险概括为单一方向的“脱钩”或“断链”，但从统计建模角度看，贸易结构变化可能同时受到出口管制、全球产业周期、中国需求扩张和第三方产能调整影响。仅用单一产品的进出口额变化来衡量政策效果，容易忽略产品异质性和替代来源差异。因此，本文不把美国出口管制视为唯一解释变量，而是将其作为重要政策背景，重点研究中国半导体相关产品进口来源结构的演化事实和风险暴露。
 
 本文围绕三个问题展开：第一，2018 年以来，中国半导体相关产品进口来源结构是否发生明显变化；第二，不同产品的来源替代路径和风险暴露是否存在差异；第三，能否构建一个可解释、可复现的进口供应链风险评价指标，并进一步探索下一年风险预测的可行性。
@@ -22,14 +31,7 @@
 
 \begin{figure}[H]
   \centering
-  \small
-  \setlength{\fboxsep}{6pt}
-  \fbox{\begin{minipage}{0.92\textwidth}
-  \centering
-  BACI 数据 $\rightarrow$ 产品筛选 $\rightarrow$ 来源结构描述 $\rightarrow$
-  SIRI 风险指数 $\rightarrow$ 固定效应检验 $\rightarrow$
-  预测扩展 $\rightarrow$ 政策建议
-  \end{minipage}}
+  \includegraphics[width=0.96\textwidth]{research_framework_flow.png}
   \caption{本文研究技术路线}
   \label{fig:research-framework}
 \end{figure}
