@@ -398,12 +398,12 @@ def plot_siri_contribution() -> None:
 def plot_policy_interaction_forest() -> None:
     plt, _ = _configure_matplotlib()
     policy = pd.read_csv(V02_TABLE_DIR / "policy_stage_regression_results_v02.csv")
-    share = pd.read_csv(V02_TABLE_DIR / "share_outcome_regression_results_v02.csv")
+    ppml_share = pd.read_csv(V02_TABLE_DIR / "ppml_share_regression_results_v02.csv")
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.4))
     specs = [
-        (axes[0], policy, "ln(import + 1)", 1.0, "Coefficient"),
-        (axes[1], share, "Import share", 100.0, "Percentage points"),
+        (axes[0], policy, "OLS: ln(import + 1)", 1.0, "Coefficient"),
+        (axes[1], ppml_share, "PPML: Import share", 1.0, "Semi-elasticity"),
     ]
     term_labels = {"US_Post2018": "US x Post2018", "US_Post2022": "US x Post2022", "US_Post2023": "US x Post2023"}
 

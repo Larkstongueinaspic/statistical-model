@@ -43,15 +43,27 @@ def _extract_terms(model: object, terms: list[str], dependent: str, model_name: 
 
 def run_stage_model(df: pd.DataFrame, dependent: str, formula_suffix: str, model_name: str, sample_label: str):
     formula = f"{dependent} ~ {' + '.join(STAGE_TERMS)} + {formula_suffix}"
-    model = smf.ols(formula=formula, data=df).fit(cov_type="HC1")
+    model = smf.ols(formula=formula, data=df).fit(
+        cov_type="cluster", cov_kwds={"groups": df["exporter_code"]}
+    )
     rows = _extract_terms(model, STAGE_TERMS, dependent, model_name, sample_label)
     return model, rows
 
 
 def run_period_model(df: pd.DataFrame, dependent: str, formula_suffix: str, model_name: str, sample_label: str):
     formula = f"{dependent} ~ {' + '.join(PERIOD_TERMS)} + {formula_suffix}"
-    model = smf.ols(formula=formula, data=df).fit(cov_type="HC1")
+    model = smf.ols(formula=formula, data=df).fit(
+        cov_type="cluster", cov_kwds={"groups": df["exporter_code"]}
+    )
     rows = _extract_terms(model, PERIOD_TERMS, dependent, model_name, sample_label)
+    return model, rows
+
+
+def run_stage_model_hc1(df: pd.DataFrame, dependent: str, formula_suffix: str, model_name: str, sample_label: str):
+    """Run stage model with HC1 robust SE (for robustness comparison)."""
+    formula = f"{dependent} ~ {' + '.join(STAGE_TERMS)} + {formula_suffix}"
+    model = smf.ols(formula=formula, data=df).fit(cov_type="HC1")
+    rows = _extract_terms(model, STAGE_TERMS, dependent, model_name, sample_label)
     return model, rows
 
 
@@ -67,13 +79,19 @@ def run_all_regressions(panel: pd.DataFrame, main_exporter_panel: pd.DataFrame, 
     pooled_suffix = "C(exporter_code) + C(product_code) + C(year)"
     product_suffix = "C(exporter_code) + C(year)"
 
+    # Primary baseline: exporter FE + product FE + year FE, clustered SE by exporter
     baseline_model, rows = run_stage_model(panel, "ln_import_value", pooled_suffix, "pooled_stage_ln", "all_selected_products")
     models["pooled_stage_ln_model_v02.txt"] = baseline_model
     policy_rows.extend(rows)
 
-    share_model, rows = run_stage_model(panel, "import_share", pooled_suffix, "pooled_stage_share", "all_selected_products")
+    share_model, rows = run_stage_model_hc1(panel, "import_share", pooled_suffix, "pooled_stage_share", "all_selected_products")
     models["pooled_stage_share_model_v02.txt"] = share_model
     share_rows.extend(rows)
+
+    # Robustness: HC1 SE (original specification for comparison)
+    hc1_model, rows = run_stage_model_hc1(panel, "ln_import_value", pooled_suffix, "robust_hc1_se", "all_selected_products")
+    models["robust_hc1_se_model_v02.txt"] = hc1_model
+    robustness_rows.extend(rows)
 
     asinh_model, rows = run_stage_model(panel, "asinh_import_value", pooled_suffix, "robust_asinh", "all_selected_products")
     models["robust_asinh_model_v02.txt"] = asinh_model

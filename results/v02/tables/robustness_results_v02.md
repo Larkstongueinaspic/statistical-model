@@ -1,11 +1,14 @@
-| model                     | sample                     | dependent_variable | term        | coef      | std_error | p_value  | ci_low    | ci_high  | nobs  | r_squared | approx_pct_effect |
-| ------------------------- | -------------------------- | ------------------ | ----------- | --------- | --------- | -------- | --------- | -------- | ----- | --------- | ----------------- |
-| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2018 | 0.161557  | 0.493406  | 0.743341 | -0.805501 | 1.128616 | 10608 | 0.867664  |                   |
-| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2022 | 0.043018  | 0.972332  | 0.964712 | -1.862717 | 1.948753 | 10608 | 0.867664  |                   |
-| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2023 | -0.119322 | 1.095397  | 0.913257 | -2.26626  | 2.027616 | 10608 | 0.867664  |                   |
-| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2018 | 0.174222  | 0.618645  | 0.778236 | -1.0383   | 1.386743 | 9360  | 0.872983  | 0.19032           |
-| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2022 | 0.028082  | 1.017893  | 0.97799  | -1.966951 | 2.023116 | 9360  | 0.872983  | 0.02848           |
-| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2023 | -0.131146 | 1.058041  | 0.901353 | -2.204869 | 1.942577 | 9360  | 0.872983  | -0.12291          |
-| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2018 | -0.317952 | 0.363741  | 0.382055 | -1.030871 | 0.394967 | 680   | 0.563008  | -0.272362         |
-| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2022 | -0.273874 | 0.72227   | 0.70455  | -1.689497 | 1.141749 | 680   | 0.563008  | -0.239572         |
-| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2023 | -0.126998 | 0.841616  | 0.880056 | -1.776535 | 1.522539 | 680   | 0.563008  | -0.119265         |
+| model                     | sample                     | dependent_variable | term        | coef      | std_error | p_value  | ci_low    | ci_high   | nobs  | r_squared | approx_pct_effect |
+| ------------------------- | -------------------------- | ------------------ | ----------- | --------- | --------- | -------- | --------- | --------- | ----- | --------- | ----------------- |
+| robust_hc1_se             | all_selected_products      | ln_import_value    | US_Post2018 | 0.17663   | 0.470759  | 0.707509 | -0.74604  | 1.0993    | 10608 | 0.872752  | 0.19319           |
+| robust_hc1_se             | all_selected_products      | ln_import_value    | US_Post2022 | 0.025674  | 0.929935  | 0.977975 | -1.796966 | 1.848313  | 10608 | 0.872752  | 0.026006          |
+| robust_hc1_se             | all_selected_products      | ln_import_value    | US_Post2023 | -0.131146 | 1.05002   | 0.900604 | -2.189147 | 1.926855  | 10608 | 0.872752  | -0.12291          |
+| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2018 | 0.161557  | 0.063385  | 0.010809 | 0.037325  | 0.28579   | 10608 | 0.867664  |                   |
+| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2022 | 0.043018  | 0.053127  | 0.418105 | -0.06111  | 0.147145  | 10608 | 0.867664  |                   |
+| robust_asinh              | all_selected_products      | asinh_import_value | US_Post2023 | -0.119322 | 0.05808   | 0.039931 | -0.233156 | -0.005488 | 10608 | 0.867664  |                   |
+| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2018 | 0.174222  | 0.056669  | 0.002109 | 0.063154  | 0.28529   | 9360  | 0.872983  | 0.19032           |
+| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2022 | 0.028082  | 0.059345  | 0.63607  | -0.088232 | 0.144397  | 9360  | 0.872983  | 0.02848           |
+| robust_drop_2020_2021     | all_selected_products      | ln_import_value    | US_Post2023 | -0.131146 | 0.052011  | 0.011685 | -0.233085 | -0.029207 | 9360  | 0.872983  | -0.12291          |
+| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2018 | -0.317952 | 0.142594  | 0.025763 | -0.597431 | -0.038473 | 680   | 0.563008  | -0.272362         |
+| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2022 | -0.273874 | 0.088196  | 0.001901 | -0.446735 | -0.101013 | 680   | 0.563008  | -0.239572         |
+| robust_top10_2024_sources | top10_2024_sources_plus_us | ln_import_value    | US_Post2023 | -0.126998 | 0.126511  | 0.31545  | -0.374955 | 0.120959  | 680   | 0.563008  | -0.119265         |

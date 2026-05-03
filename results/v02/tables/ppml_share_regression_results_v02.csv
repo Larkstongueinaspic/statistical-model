@@ -1,0 +1,4 @@
+model,sample,dependent_variable,term,coef,std_error,p_value,ci_low,ci_high,nobs
+ppml_share,all_selected_products,import_share,US_Post2018,-0.052781,0.074461,0.47842,-0.198723,0.09316,10608
+ppml_share,all_selected_products,import_share,US_Post2022,-0.292955,0.030883,0.0,-0.353484,-0.232426,10608
+ppml_share,all_selected_products,import_share,US_Post2023,-0.320066,0.062039,0.0,-0.44166,-0.198472,10608

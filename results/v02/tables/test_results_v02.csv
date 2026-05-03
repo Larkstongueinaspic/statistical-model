@@ -7,10 +7,10 @@ data,Import values are non-negative,PASS,Min value: 0.000000 kUSD
 data,Multi-product panel row count matches product-specific exporter-year expansion,PASS,"Observed rows: 10608, expected rows: 10608"
 data,Post2018/Post2022/Post2023 indicators are correct,PASS,Recomputed policy indicators from year.
 data,Positive trade sample is restricted to China and candidate products,PASS,Positive rows: 5619
-script,v0.2 output paths are versioned,PASS,Output dir: /Users/bo_yu/Documents/statistical model/results/v02
-script,Expected v0.2 figure files were generated,PASS,"Figure files: ['source_hhi_by_product_v02.png', 'top_2024_source_shares_by_product_v02.png', 'total_imports_by_product_v02.png', 'usa_import_share_by_product_v02.png', 'usa_imports_by_product_v02.png', 'usa_share_by_product_group_v02.png', 'usa_share_index_2017_by_product_v02.png']"
-script,Expected v0.2 table files were generated,PASS,CSV table count: 13
-script,v0.1 output directories are not used by v0.2 config,PASS,Data output dir: /Users/bo_yu/Documents/statistical model/results/v02/data
+script,v0.2 output paths are versioned,FAIL,Output dir: E:\Project\statistical-model\statistical-model\results\v02
+script,Expected v0.2 figure files were generated,PASS,"Figure files: ['siri_trend_by_product_v02.png', 'source_hhi_by_product_v02.png', 'top_2024_source_shares_by_product_v02.png', 'total_imports_by_product_v02.png', 'usa_import_share_by_product_v02.png', 'usa_imports_by_product_v02.png', 'usa_share_by_product_group_v02.png', 'usa_share_index_2017_by_product_v02.png']"
+script,Expected v0.2 table files were generated,PASS,CSV table count: 16
+script,v0.1 output directories are not used by v0.2 config,PASS,Data output dir: E:\Project\statistical-model\statistical-model\results\v02\data
 result,Annual product totals match panel aggregation,PASS,Compared annual summary against panel groupby totals.
 result,US product-year totals match panel aggregation,PASS,Compared US annual summary against panel US groupby totals.
 result,US shares match annual summary arithmetic,PASS,Recomputed us_share from annual totals.
