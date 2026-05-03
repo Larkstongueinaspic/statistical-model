@@ -1,4 +1,11 @@
-\documentclass[UTF8,a4paper,12pt]{ctexart}
+\documentclass[UTF8,a4paper,12pt,fontset=none]{ctexart}
+\setCJKmainfont{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\newCJKfontfamily\heiti{SimHei}
+\newCJKfontfamily\kaiti{KaiTi}
+\newCJKfontfamily\fangsong{FangSong}
+\newCJKfontfamily\songti{SimSun}
 
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -17,12 +24,19 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{titling}
+\usepackage{etoolbox}
+\usepackage{indentfirst}
+\makeatletter
+\def\tagform@#1{\maketag@@@{\hspace{0.5em}公式(\ignorespaces#1\unskip\@@italiccorr)\hspace{0.5em}}}
+\renewcommand{\eqref}[1]{公式\textup{(\ref{#1})}}
+\makeatother
+\usepackage{tocloft}
 
-\geometry{left=2.8cm,right=2.8cm,top=2.6cm,bottom=2.6cm}
+\geometry{left=3.17cm,right=3.17cm,top=2.54cm,bottom=2.54cm}
 \hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black}
 \graphicspath{{figures/}}
 
-\newcommand{\papertitle}{大国博弈下中国半导体相关产品进口来源结构演化与供应链风险评估研究}
+\newcommand{\papertitle}{大国博弈下中国半导体相关产品\\进口来源结构演化与供应链风险评估研究}
 \newcommand{\school}{最终提交前由参赛队填写}
 \newcommand{\teamname}{最终提交前由参赛队填写}
 \newcommand{\members}{最终提交前由参赛队填写}
@@ -30,10 +44,13 @@
 
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
-\linespread{1.18}
+\linespread{1.667}\selectfont
 \setlist{nosep,leftmargin=2em}
-\captionsetup{font=small,labelfont=bf,labelsep=space}
+\captionsetup{font=normalsize,labelfont=bf,labelsep=quad}
 \captionsetup[table]{position=top}
+\AtBeginEnvironment{tabular}{\fontsize{10.5}{12}\selectfont}
+\AtBeginEnvironment{longtable}{\fontsize{10.5}{12}\selectfont}
+\AtBeginEnvironment{table}{\fontsize{10.5}{12}\selectfont}
 \setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
@@ -43,45 +60,88 @@
 \renewcommand\thesubsection{（\chinese{subsection}）}
 \renewcommand\thesubsubsection{\arabic{subsubsection}.}
 
-\titleformat{\section}{\centering\bfseries\large}{\thesection、}{0pt}{}
-\titleformat{\subsection}{\bfseries\normalsize}{\thesubsection}{0pt}{}
-\titleformat{\subsubsection}{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
-\titlespacing*{\section}{0pt}{1.2ex plus .2ex}{0.8ex}
-\titlespacing*{\subsection}{0pt}{0.8ex plus .2ex}{0.4ex}
-\titlespacing*{\subsubsection}{0pt}{0.6ex plus .2ex}{0.3ex}
+\titleformat{\section}{\heiti\zihao{-3}}{\thesection、}{0pt}{}
+\titleformat{\subsection}{\kaiti\zihao{4}}{\thesubsection}{0pt}{}
+\titleformat{\subsubsection}{\songti\zihao{-4}\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{12pt}{0pt}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+
+\ctexset{
+  contentsname = {目\quad 录},
+}
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{\small \papertitle}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\zihao{5}\thepage}
+\renewcommand{\headrulewidth}{0pt}
 
 \newcommand{\paperabstract}[2]{%
+  \clearpage
   \begin{center}
-  {\bfseries\large 摘\quad 要}
+  {\heiti\zihao{4} 摘\quad 要}
   \end{center}
-  \vspace{0.5ex}
-  #1
+  \hspace{2em}#1
   \vspace{0.8ex}
 
-  \noindent\textbf{关键词：}#2
+  {\heiti\zihao{-4} 关键词：}#2
 }
 
-\title{\textbf{\papertitle}\\[1ex]
-\large ——基于BACI微观测算、SIRI风险指数与统计证据边界的实证分析}
-\author{\school\\\teamname\\[1ex] 成员：\members\\[1ex] 指导教师：\advisor}
-\date{2026年}
+\setcounter{tocdepth}{2}
+\renewcommand{\cftsecfont}{\heiti\bfseries}
+\renewcommand{\refname}{\heiti\zihao{4} 参考文献}
 
 \begin{document}
-\maketitle
-\thispagestyle{empty}
-\clearpage
 
+% ============ 封面页 ============
+\begin{titlepage}
+\begin{center}
+  {\heiti\zihao{3} 作品编号：\underline{\hspace{4cm}}}\\[2.5cm]
+  {\zihao{2} 2026年（第十二届）全国大学生统计建模大赛}\\[0.8cm]
+  {\zihao{-1} 参\quad 赛\quad 作\quad 品}\\[2.5cm]
+  {\fangsong\zihao{-2}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{r@{\hspace{0.5em}：\hspace{0.5em}}l}
+    参赛学校 & \school \\
+    论文题目 & \papertitle \\
+    参赛队员 & \members \\
+    指导老师 & \advisor \\
+  \end{tabular}}
+\end{center}
+\end{titlepage}
+
+% ============ 摘要 ============
 \input{sections/abstract}
+
+% ============ 目录 ============
 \clearpage
+\begin{center}
+{\heiti\zihao{4} 目\quad 录}
+\end{center}
+\begingroup
+\renewcommand{\contentsname}{}
 \tableofcontents
+\endgroup
+
+% ============ 表格与插图清单 ============
+\clearpage
+\begin{center}
+{\heiti\zihao{4} 表格与插图清单}
+\end{center}
+\begingroup
+\renewcommand{\listtablename}{\heiti\zihao{4}\bfseries 表格}
+\renewcommand{\listfigurename}{\heiti\zihao{4}\bfseries 插图}
+\listoftables
+\listoffigures
+\endgroup
 \clearpage
 
+% ============ 正文（页码从1开始） ============
+\setcounter{page}{1}
+\begin{center}
+{\zihao{3} \papertitle}
+\end{center}
+\vspace{0.5cm}
 \input{sections/introduction}
 \input{sections/literature_review}
 \input{sections/data}
@@ -91,10 +151,34 @@
 \input{sections/prediction_extension}
 \input{sections/conclusion}
 
+% ============ 参考文献 ============
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
 \bibliographystyle{unsrtnat}
 \bibliography{references}
 
+% ============ 附录 ============
+\clearpage
 \appendix
+\phantomsection
+\addcontentsline{toc}{section}{附录}
+\section*{\heiti\zihao{4} 附\quad 录}
 \input{sections/appendix}
+
+% ============ 致谢 ============
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{致谢}
+\begin{center}
+{\heiti\zihao{4} 致\quad 谢}
+\end{center}
+\hspace{2em}衷心感谢指导教师李晓花老师在本次统计建模大赛全程中给予的悉心指导与及时帮助。李老师在选题方向、排版规范和公式选择等关键环节提出了许多宝贵建议，使我们在研究思路和论文撰写上受益匪浅。
+
+感谢队友于重阳、龚旭和余博的密切协作。余博承担了数据处理与图表绘制工作，龚旭负责确定选题、排版校对与论文架构设计，于重阳负责论文文稿的编写与修改。三人各司其职、相互配合，共同完成了本次研究。
+
+\begin{flushright}
+2026 年 5 月 2 日
+\end{flushright}
 
 \end{document}

@@ -1,19 +1,19 @@
-\section{复现说明}
+\subsection{复现说明}
 
-\subsection{运行命令}
+\subsubsection{运行命令}
 
 主要复现命令如下：
 \begin{verbatim}
-.venv/bin/python scripts/run_v02_analysis.py
-.venv/bin/python scripts/run_v03_gcn_analysis.py --baci-only
+.venv/bin/python scripts/run_analysis.py
+.venv/bin/python scripts/run_gcn_analysis.py --baci-only
 \end{verbatim}
-当前仓库已保存 v0.2 的缓存结果。若需从原始数据完整复现，需要将 BACI HS07 V202601 原始数据目录放置于项目根目录下的 \texttt{BACI\_HS07\_V202601/}。
+若需从原始数据完整复现，需要将 BACI HS07 V202601 原始数据目录放置于项目根目录下的 \texttt{BACI\_HS07\_V202601/}。
 
-\subsection{GDELT 数据接口预留}
+\subsubsection{GDELT 数据接口预留}
 
-本文 v0.3 扩展结果使用 BACI-only 模式生成；若需启用 GDELT 新闻事件压力变量，可使用如下命令：
+本文预测扩展结果使用 BACI-only 模式生成；若需启用 GDELT 新闻事件压力变量，可使用如下命令：
 \begin{verbatim}
-.venv/bin/python scripts/run_v03_gcn_analysis.py \
+.venv/bin/python scripts/run_gcn_analysis.py \
   --gdelt-events data/gdelt/prefiltered_events.csv
 \end{verbatim}
 该 CSV 至少需要包含以下字段：
@@ -23,7 +23,7 @@
   \item \texttt{GoldsteinScale}、\texttt{NumMentions}、\texttt{AvgTone}
 \end{itemize}
 
-\section{变量说明}
+\subsection{变量说明}
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.53\textwidth}@{}}
 \toprule
@@ -41,6 +41,21 @@
 \bottomrule
 \end{longtable}
 
-\section{AI 工具使用说明}
+\subsection{AI 工具使用说明}
 
-本文写作和代码整理过程中使用 AI 工具辅助结构设计、代码实现建议、LaTeX 排版和文字润色。数据来源、模型设定、结果解释和最终结论由参赛队审核确认。详细记录见 \texttt{paper/ai\_usage\_notes.md}，最终提交时应按官方 AI 工具使用情况表格式填写。
+本文写作和代码整理过程中使用 AI 工具辅助结构设计、代码实现建议、LaTeX 排版和文字润色。数据来源、模型设定、结果解释和最终结论由参赛队审核确认。具体使用记录见表 \ref{tab:ai-usage}。
+
+\begin{table}[H]
+  \centering
+  \caption{AI 工具使用记录}
+  \label{tab:ai-usage}
+  \begin{tabular}{@{}p{1.8cm}p{1.2cm}p{1.6cm}p{4.2cm}p{4.2cm}@{}}
+    \toprule
+    日期 & 工具 & 使用阶段 & 具体任务 & 人工审核 \\
+    \midrule
+    2026-04-28 & Codex & 选题设计 & 提供论文结构与 SIRI 指标公式备选方案，由参赛队筛选确认 & 参赛队审阅后确认研究边界与最终表述 \\
+    2026-04-28 & Codex & 代码辅助 & 协助实现 SIRI 指数计算、图表输出、验证检查和单元测试 & 参赛队核对代码逻辑、输出表格和论文表述 \\
+    2026-04-28 & Codex & LaTeX 排版 & 协助搭建论文模板、章节结构和表格格式 & 参赛队逐章审阅并修改正文表述 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
