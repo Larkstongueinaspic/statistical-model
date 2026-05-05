@@ -1,11 +1,21 @@
 \documentclass[UTF8,a4paper,12pt,fontset=none]{ctexart}
-\setCJKmainfont{SimSun}
-\setCJKsansfont{SimHei}
-\setCJKmonofont{FangSong}
-\newCJKfontfamily\heiti{SimHei}
-\newCJKfontfamily\kaiti{KaiTi}
-\newCJKfontfamily\fangsong{FangSong}
-\newCJKfontfamily\songti{SimSun}
+\IfFontExistsTF{SimSun}{%
+  \setCJKmainfont{SimSun}
+  \setCJKsansfont{SimHei}
+  \setCJKmonofont{FangSong}
+  \newCJKfontfamily\heiti{SimHei}
+  \newCJKfontfamily\kaiti{KaiTi}
+  \newCJKfontfamily\fangsong{FangSong}
+  \newCJKfontfamily\songti{SimSun}
+}{%
+  \setCJKmainfont{Songti SC}
+  \setCJKsansfont{Heiti SC}
+  \setCJKmonofont{STFangsong}
+  \newCJKfontfamily\heiti{Heiti SC}
+  \newCJKfontfamily\kaiti{Kaiti SC}
+  \newCJKfontfamily\fangsong{STFangsong}
+  \newCJKfontfamily\songti{Songti SC}
+}
 
 \usepackage{geometry}
 \usepackage{graphicx}
